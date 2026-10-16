@@ -1,0 +1,6 @@
+﻿employee_id,leave_start,leave_end,leave_type,days
+E001,2025-02-10,2025-02-11,Annual,2
+E002,2025-02-15,2025-02-15,Sick,1
+E003,2025-03-03,2025-03-05,Annual,3
+E004,2025-04-12,2025-04-12,Personal,1
+E005,2025-05-20,2025-05-21,Sick,2

@@ -1,0 +1,62 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: pulseiq-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pulseiq}
+      POSTGRES_USER: ${POSTGRES_USER:-pulseiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/warehouse/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  etl:
+    build: .
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pulseiq}
+      POSTGRES_USER: ${POSTGRES_USER:-pulseiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+    volumes:
+      - ./raw:/app/raw:ro
+      - ./clean:/app/clean
+      - ./rejected:/app/rejected
+      - ./logs:/app/logs
+      - ./src:/app/src:ro
+    command: ["python", "src/etl.py"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  dashboard:
+    build: .
+    container_name: pulseiq-dashboard
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pulseiq}
+      POSTGRES_USER: ${POSTGRES_USER:-pulseiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+    volumes:
+      - ./clean:/app/clean:ro
+      - ./src:/app/src:ro
+      - ./.env:/app/.env:ro
+    ports:
+      - "8501:8501"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

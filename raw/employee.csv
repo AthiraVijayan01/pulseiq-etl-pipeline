@@ -1,0 +1,6 @@
+﻿employee_id,first_name,last_name,department,joining_date,leaving_date,role
+E001,Asha,Nair,Engineering,2022-01-10,,Software Engineer
+E002,Rahul,Menon,Finance,2021-05-20,,Financial Analyst
+E003,Meera,Kumar,HR,2023-03-15,2025-11-30,HR Manager
+E004,Arjun,Das,Engineering,2024-08-01,,Data Engineer
+E005,,Thomas,Finance,2024-02-12,,Accountant

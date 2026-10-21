@@ -132,3 +132,21 @@ CREATE INDEX IF NOT EXISTS ix_leave_start_date
 
 CREATE INDEX IF NOT EXISTS ix_monthly_headcount_month
     ON fact_monthly_headcount(month_key);
+
+-- Grain: one row per employee and salary effective date.
+CREATE TABLE IF NOT EXISTS fact_salary (
+    salary_key BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    employee_key BIGINT NOT NULL REFERENCES dim_employee(employee_key),
+    effective_date DATE NOT NULL,
+    salary_amount NUMERIC(14,2) NOT NULL,
+    CONSTRAINT uq_fact_salary_employee_effective_date
+        UNIQUE (employee_key, effective_date),
+    CONSTRAINT ck_salary_amount_nonnegative
+        CHECK (salary_amount >= 0)
+);
+
+CREATE INDEX IF NOT EXISTS ix_salary_effective_date
+    ON fact_salary(effective_date);
+
+CREATE INDEX IF NOT EXISTS ix_salary_employee
+    ON fact_salary(employee_key);

@@ -686,6 +686,73 @@ def load_leave(
     return count
 
 
+def load_salary(
+    cursor,
+    salary: pd.DataFrame,
+) -> int:
+    validate_columns(
+        salary,
+        {"employee_id", "salary", "effective_date"},
+        "salary",
+    )
+
+    from math import isfinite
+
+    count = 0
+
+    for row_number, row in salary.iterrows():
+        employee_id = safe_text(row["employee_id"], "").strip()
+        effective_date = as_date(row["effective_date"])
+        raw_amount = pd.to_numeric(row["salary"], errors="coerce")
+
+        if not employee_id or employee_id == UNKNOWN:
+            raise ValueError(
+                f"salary row {row_number}: employee_id is missing"
+            )
+
+        if effective_date is None:
+            raise ValueError(
+                f"salary row {row_number}: effective_date is invalid"
+            )
+
+        if pd.isna(raw_amount) or not isfinite(float(raw_amount)):
+            raise ValueError(
+                f"salary row {row_number}: salary must be a finite number"
+            )
+
+        salary_amount = float(raw_amount)
+
+        if salary_amount < 0:
+            raise ValueError(
+                f"salary row {row_number}: salary cannot be negative"
+            )
+
+        employee_key = get_employee_key_as_of(
+            cursor,
+            employee_id,
+            effective_date,
+        )
+
+        cursor.execute(
+            """
+            INSERT INTO fact_salary (
+                employee_key,
+                effective_date,
+                salary_amount
+            )
+            VALUES (%s, %s, %s)
+            ON CONFLICT (employee_key, effective_date)
+            DO UPDATE SET
+                salary_amount = EXCLUDED.salary_amount
+            """,
+            (employee_key, effective_date, salary_amount),
+        )
+
+        count += 1
+
+    return count
+
+
 def load_monthly_headcount(
     cursor,
     employees: pd.DataFrame,
@@ -839,6 +906,7 @@ def load_warehouse() -> dict[str, int]:
     attendance = read_csv("attendance")
     payroll = read_csv("payroll")
     leave = read_csv("leave")
+    salary = read_csv("salary")
 
     validate_columns(
         employees,
@@ -889,6 +957,12 @@ def load_warehouse() -> dict[str, int]:
         "leave",
     )
 
+    validate_columns(
+        salary,
+        {"employee_id", "salary", "effective_date"},
+        "salary",
+    )
+
     results: dict[str, int] = {}
 
     with database_connection() as connection:
@@ -900,6 +974,11 @@ def load_warehouse() -> dict[str, int]:
                 )
 
                 results["employees"] = len(employee_keys)
+
+                results["salary"] = load_salary(
+                    cursor,
+                    salary,
+                )
 
                 results["attendance"] = load_attendance(
                     cursor,

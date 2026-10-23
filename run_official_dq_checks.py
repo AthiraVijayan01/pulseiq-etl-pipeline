@@ -1,0 +1,440 @@
+from datetime import datetime, timezone
+from uuid import uuid4
+
+from psycopg import sql
+from src.db import get_connection
+
+
+SCHEMA = "official_stage"
+RESULT_SCHEMA = "workforce_metrics"
+
+CHECKS = [
+    (
+        "DQ-C01", "Payroll equals ledger", "Critical",
+        """
+        WITH p AS (
+            SELECT date_trunc('month', period_end_date::date)::date AS month,
+                   SUM(employer_cost::numeric) AS cost
+            FROM official_stage.fact_payroll
+            WHERE NULLIF(TRIM(period_end_date), '') IS NOT NULL
+            GROUP BY 1
+        ),
+        l AS (
+            SELECT date_trunc('month', entry_date::date)::date AS month,
+                   SUM(signed_amount_debit_positive::numeric) AS cost
+            FROM official_stage.fact_ledger
+            WHERE account_code IN ('5001','5002','5003','5004','5005')
+              AND NULLIF(TRIM(entry_date), '') IS NOT NULL
+            GROUP BY 1
+        )
+        SELECT COALESCE(p.month,l.month)::text AS month,
+               COALESCE(p.cost,0) AS payroll_cost,
+               COALESCE(l.cost,0) AS ledger_cost
+        FROM p FULL JOIN l USING (month)
+        WHERE ABS(COALESCE(p.cost,0)-COALESCE(l.cost,0)) > 0.01
+        """,
+    ),
+    (
+        "DQ-C02", "Ledger balanced", "Critical",
+        """
+        SELECT entry_id, SUM(debit::numeric) AS debit,
+               SUM(credit::numeric) AS credit
+        FROM official_stage.fact_ledger
+        GROUP BY entry_id
+        HAVING ABS(SUM(debit::numeric)-SUM(credit::numeric)) > 0.005
+        """,
+    ),
+    (
+        "DQ-C03", "Unique payroll rows", "Critical",
+        """
+        SELECT employee_id, run_id, COUNT(*) AS row_count
+        FROM official_stage.fact_payroll
+        GROUP BY employee_id, run_id
+        HAVING COUNT(*) > 1
+        """,
+    ),
+    (
+        "DQ-C04", "No orphan employees", "Critical",
+        """
+        SELECT f.payroll_item_id, f.employee_id
+        FROM official_stage.fact_payroll f
+        WHERE NOT EXISTS (
+            SELECT 1 FROM official_stage.dim_employee d
+            WHERE d.employee_id = f.employee_id
+        )
+        """,
+    ),
+    (
+        "DQ-C05", "No attendance after exit", "Warning",
+        """
+        SELECT a.attendance_fact_id, a.employee_id, a.period_end_date,
+               d.exit_date
+        FROM official_stage.fact_attendance_monthly a
+        JOIN official_stage.dim_employee d
+          ON d.employee_id = a.employee_id
+         AND UPPER(TRIM(d.is_current)) = 'Y'
+        WHERE NULLIF(TRIM(d.exit_date),'') IS NOT NULL
+          AND NULLIF(TRIM(a.period_end_date),'') IS NOT NULL
+          AND a.period_end_date::date >
+              (date_trunc('month',d.exit_date::date)
+               + interval '1 month - 1 day')::date
+        """,
+    ),
+    (
+        "DQ-C06", "Unpaid leave deducted", "Warning",
+        """
+        WITH a AS (
+            SELECT employee_id,
+                   date_trunc('month',period_end_date::date)::date AS month,
+                   SUM(unpaid_absence_days::numeric) AS unpaid_days
+            FROM official_stage.fact_attendance_monthly
+            WHERE NULLIF(TRIM(period_end_date),'') IS NOT NULL
+            GROUP BY 1,2
+        ),
+        p AS (
+            SELECT employee_id,
+                   date_trunc('month',period_end_date::date)::date AS month,
+                   SUM(lop_days::numeric) AS lop_days
+            FROM official_stage.fact_payroll
+            WHERE NULLIF(TRIM(period_end_date),'') IS NOT NULL
+            GROUP BY 1,2
+        )
+        SELECT a.employee_id, a.month, a.unpaid_days,
+               COALESCE(p.lop_days,0) AS lop_days
+        FROM a LEFT JOIN p USING (employee_id,month)
+        WHERE a.unpaid_days > 0
+          AND ABS(a.unpaid_days-COALESCE(p.lop_days,0)) > 0.5
+        """,
+    ),
+    (
+        "DQ-C07", "Invoice arithmetic", "Warning",
+        """
+        SELECT invoice_id, amount_paid, total_amount, balance_due
+        FROM official_stage.fact_invoice
+        WHERE amount_paid::numeric > total_amount::numeric + 0.01
+           OR balance_due::numeric < -0.01
+        """,
+    ),
+    (
+        "DQ-C08", "Expense arithmetic", "Warning",
+        """
+        SELECT expense_id, total_amount, amount_excl_gst, gst_amount
+        FROM official_stage.fact_expense
+        WHERE ABS(total_amount::numeric -
+                  (amount_excl_gst::numeric + gst_amount::numeric)) > 0.01
+        """,
+    ),
+    (
+        "DQ-C09", "Task dates sensible", "Warning",
+        """
+        SELECT task_id, status, started_date, completed_date
+        FROM official_stage.fact_task
+        WHERE (
+            NULLIF(TRIM(started_date),'') IS NOT NULL
+            AND NULLIF(TRIM(completed_date),'') IS NOT NULL
+            AND completed_date::date < started_date::date
+        ) OR (
+            UPPER(TRIM(status)) = 'DONE'
+            AND NULLIF(TRIM(completed_date),'') IS NULL
+        )
+        """,
+    ),
+    (
+        "DQ-C10", "Leave dates sensible", "Warning",
+        """
+        SELECT leave_request_id, start_date, end_date
+        FROM official_stage.fact_leave
+        WHERE NULLIF(TRIM(start_date),'') IS NOT NULL
+          AND NULLIF(TRIM(end_date),'') IS NOT NULL
+          AND end_date::date < start_date::date
+        """,
+    ),
+    (
+        "DQ-C11", "AI feeds are fresh", "Warning",
+        """
+        WITH latest_load AS (
+            SELECT MAX((finished_at AT TIME ZONE 'Asia/Kolkata')::date)
+                       AS load_date
+            FROM workforce_metrics.etl_run_log
+            WHERE UPPER(TRIM(status)) = 'SUCCESS'
+              AND finished_at IS NOT NULL
+        ),
+        latest_prediction AS (
+            SELECT MAX(as_of_date::date) AS latest_as_of_date
+            FROM official_stage.fact_attrition_risk
+            WHERE NULLIF(TRIM(as_of_date), '') IS NOT NULL
+        )
+        SELECT
+            CASE
+                WHEN latest_load.load_date IS NULL
+                    THEN 'No successful ETL load timestamp'
+                WHEN latest_prediction.latest_as_of_date IS NULL
+                    THEN 'No valid prediction as_of_date'
+                WHEN latest_prediction.latest_as_of_date
+                     < latest_load.load_date - 7
+                    THEN 'Prediction feed stale'
+            END AS issue,
+            latest_prediction.latest_as_of_date,
+            latest_load.load_date
+        FROM latest_load
+        CROSS JOIN latest_prediction
+        WHERE latest_load.load_date IS NULL
+           OR latest_prediction.latest_as_of_date IS NULL
+           OR latest_prediction.latest_as_of_date
+                < latest_load.load_date - 7
+        """,
+    ),
+    (
+        "DQ-C12", "Dimension history does not overlap", "Critical",
+        """
+        SELECT a.employee_id, a.employee_key AS earlier_key,
+               b.employee_key AS later_key,
+               a.valid_to, b.valid_from
+        FROM official_stage.dim_employee a
+        JOIN official_stage.dim_employee b
+          ON a.employee_id = b.employee_id
+         AND a.employee_key::bigint < b.employee_key::bigint
+        WHERE NULLIF(TRIM(a.valid_to),'') IS NOT NULL
+          AND NULLIF(TRIM(b.valid_from),'') IS NOT NULL
+          AND a.valid_to::date >= b.valid_from::date
+        """,
+    ),
+]
+
+
+def table_columns(cur, schema_name, table_name):
+    cur.execute("""
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema = %s AND table_name = %s
+    """, (schema_name, table_name))
+    return {row[0] for row in cur.fetchall()}
+
+
+def main():
+    run_id = uuid4()
+    conn = get_connection()
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                sql.SQL("CREATE SCHEMA IF NOT EXISTS {}").format(
+                    sql.Identifier(RESULT_SCHEMA)
+                )
+            )
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS
+                    workforce_metrics.dq_check_results (
+                    result_id BIGSERIAL PRIMARY KEY,
+                    run_id UUID NOT NULL,
+                    check_id TEXT NOT NULL,
+                    check_name TEXT NOT NULL,
+                    severity TEXT NOT NULL,
+                    failed_rows BIGINT,
+                    status TEXT NOT NULL,
+                    details TEXT,
+                    checked_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                )
+            """)
+            conn.commit()
+
+            print(f"\nDQ run ID: {run_id}")
+            print("=" * 78)
+
+            results = []
+
+            for check_id, name, severity, query in CHECKS:
+                try:
+                    cur.execute(query)
+                    rows = cur.fetchall()
+                    count = len(rows)
+                    status = "PASS" if count == 0 else "FAIL"
+                    details = repr(rows[:5]) if rows else "No failing rows"
+
+                    if check_id == "DQ-C11":
+                        if count == 0:
+                            status = "BLOCKED"
+                            details = (
+                                "No stale prediction date detected against the "
+                                "latest successful ETL load. Full verification is "
+                                "BLOCKED because scored_at is unavailable, so the "
+                                "24-hour scoring-time rule cannot be checked."
+                            )
+                        else:
+                            issue = rows[0][0]
+                            status = (
+                                "FAIL"
+                                if issue == "Prediction feed stale"
+                                else "BLOCKED"
+                            )
+                            details = (
+                                f"{issue}; prediction/load dates: {rows[0][1:]}; "
+                                "the 24-hour scoring-time rule remains unverified "
+                                "because scored_at is unavailable."
+                            )
+
+                except Exception as exc:
+                    conn.rollback()
+                    count = None
+                    status = "BLOCKED"
+                    details = f"Check could not execute: {exc}"
+
+                cur.execute("""
+                    INSERT INTO workforce_metrics.dq_check_results
+                    (run_id, check_id, check_name, severity,
+                     failed_rows, status, details)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s)
+                """, (
+                    str(run_id), check_id, name, severity,
+                    count, status, details
+                ))
+                conn.commit()
+
+                results.append((check_id, name, status, count))
+                print(f"{check_id} | {name} | {status} | bad rows: {count}")
+
+            # C13: freshness depends on the actual ETL run log.
+            cur.execute("""
+                SELECT table_schema, table_name
+                FROM information_schema.tables
+                WHERE table_schema = 'workforce_metrics'
+                  AND table_name = 'etl_run_log'
+                  AND table_type = 'BASE TABLE'
+            """)
+            log_table = cur.fetchone()
+
+            c13_status = "BLOCKED"
+            c13_count = None
+            c13_details = "etl_run_log table not found; freshness cannot be verified."
+
+            if log_table:
+                log_schema, log_name = log_table
+                cols = table_columns(cur, log_schema, log_name)
+
+                if "finished_at" in cols:
+                    if "status" in cols:
+                        cur.execute(
+                            sql.SQL("""
+                                SELECT MAX(finished_at)
+                                FROM {}.{}
+                                WHERE UPPER(TRIM(status::text))
+                                  IN ('SUCCESS','SUCCEEDED','PASS')
+                            """).format(
+                                sql.Identifier(log_schema),
+                                sql.Identifier(log_name)
+                            )
+                        )
+                    else:
+                        cur.execute(
+                            sql.SQL("SELECT MAX(finished_at) FROM {}.{}").format(
+                                sql.Identifier(log_schema),
+                                sql.Identifier(log_name)
+                            )
+                        )
+
+                    latest = cur.fetchone()[0]
+                    if latest is None:
+                        c13_details = "No successful finish timestamp found."
+                    else:
+                        if latest.tzinfo is None:
+                            latest = latest.replace(tzinfo=timezone.utc)
+                        age_hours = (
+                            datetime.now(timezone.utc) - latest
+                        ).total_seconds() / 3600
+                        c13_count = 0 if age_hours <= 24 else 1
+                        c13_status = "PASS" if c13_count == 0 else "FAIL"
+                        c13_details = (
+                            f"Latest finish: {latest.isoformat()}; "
+                            f"age hours: {age_hours:.2f}"
+                        )
+                else:
+                    c13_details = (
+                        f"{log_schema}.{log_name} has no finished_at column."
+                    )
+
+            cur.execute("""
+                INSERT INTO workforce_metrics.dq_check_results
+                (run_id, check_id, check_name, severity,
+                 failed_rows, status, details)
+                VALUES (%s,'DQ-C13','Pipeline freshness','Critical',%s,%s,%s)
+            """, (str(run_id), c13_count, c13_status, c13_details))
+            conn.commit()
+            results.append(("DQ-C13", "Pipeline freshness",
+                            c13_status, c13_count))
+            print(f"DQ-C13 | Pipeline freshness | {c13_status} | bad rows: {c13_count}")
+
+            # C14: check privacy suppression on the existing metric views.
+            # Views with employee_count are checked against their catalog threshold.
+            cur.execute("""
+                SELECT metric_id, minimum_group_size
+                FROM workforce_metrics.metric_catalog
+            """)
+            min_sizes = {
+                metric_id: int(size)
+                for metric_id, size in cur.fetchall()
+                if size and str(size).isdigit()
+            }
+
+            privacy_violations = []
+            for metric_id, view_name in [
+                ("M07", "v_m07_gross_pay"),
+                ("M08", "v_m08_net_pay"),
+                ("M09", "v_m09_employer_payroll_cost"),
+                ("M10", "v_m10_cost_per_head"),
+                ("M11", "v_m11_overtime_share"),
+                ("M12", "v_m12_variable_pay_share"),
+                ("M13", "v_m13_attendance_rate"),
+                ("M14", "v_m14_late_arrival_rate"),
+                ("M15", "v_m15_lop_days"),
+            ]:
+                threshold = min_sizes.get(metric_id, 5)
+                try:
+                    cur.execute(
+                        sql.SQL("""
+                            SELECT COUNT(*) FROM workforce_metrics.{}
+                            WHERE employee_count < %s
+                        """).format(sql.Identifier(view_name)),
+                        (threshold,)
+                    )
+                    bad = cur.fetchone()[0]
+                    if bad:
+                        privacy_violations.append((view_name, bad))
+                except Exception as exc:
+                    privacy_violations.append((view_name, f"ERROR: {exc}"))
+
+            if any(isinstance(v, str) for _, v in privacy_violations):
+                c14_status = "BLOCKED"
+                c14_count = None
+            else:
+                c14_count = sum(v for _, v in privacy_violations)
+                c14_status = "PASS" if c14_count == 0 else "FAIL"
+
+            c14_details = (
+                repr(privacy_violations)
+                if privacy_violations
+                else "No employee-count threshold violations in checked views. "
+                     "Other metric grains require separate privacy review."
+            )
+            cur.execute("""
+                INSERT INTO workforce_metrics.dq_check_results
+                (run_id, check_id, check_name, severity,
+                 failed_rows, status, details)
+                VALUES (%s,'DQ-C14','Minimum group size','Critical',%s,%s,%s)
+            """, (str(run_id), c14_count, c14_status, c14_details))
+            conn.commit()
+            results.append(("DQ-C14", "Minimum group size",
+                            c14_status, c14_count))
+            print(f"DQ-C14 | Minimum group size | {c14_status} | bad rows: {c14_count}")
+
+            print("\n=== SUMMARY ===")
+            for status in ("PASS", "FAIL", "BLOCKED"):
+                print(f"{status}: {sum(1 for r in results if r[2] == status)}")
+
+            print("\nResults saved in workforce_metrics.dq_check_results")
+
+    finally:
+        conn.close()
+
+
+if __name__ == "__main__":
+    main()

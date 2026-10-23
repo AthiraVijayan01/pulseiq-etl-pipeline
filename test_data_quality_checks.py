@@ -135,7 +135,7 @@ def main():
 
                 try:
                     cur.execute(
-                        "TRUNCATE TABLE " + ", ".join(TABLES)
+                        "TRUNCATE TABLE " + ", ".join("pg_temp." + table for table in TABLES)
                     )
 
                     for statement in statements:
@@ -175,3 +175,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

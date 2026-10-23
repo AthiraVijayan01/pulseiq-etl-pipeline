@@ -1,0 +1,31 @@
+vendor_id,vendor_name,primary_expense_account,payment_terms_days,city,gst_registration,is_active
+V-001,Skyline Realty Holdings,5101,30,Mumbai,DEMO-VGSTIN-0001,Y
+V-002,Garden City Workspaces,5101,15,Hyderabad,DEMO-VGSTIN-0002,Y
+V-003,Marina Business Park LLP,5101,30,Bengaluru,DEMO-VGSTIN-0003,Y
+V-004,Southern Power Distribution,5102,15,Mumbai,DEMO-VGSTIN-0004,Y
+V-005,MetroWater Services,5102,15,Bengaluru,DEMO-VGSTIN-0005,Y
+V-006,FiberNet Broadband,5103,30,Mumbai,DEMO-VGSTIN-0006,Y
+V-007,Connectix Telecom,5103,30,Mumbai,DEMO-VGSTIN-0007,Y
+V-008,NimbusCloud Services,5104,30,Bengaluru,DEMO-VGSTIN-0008,Y
+V-009,StratoHost Infrastructure,5104,30,Bengaluru,DEMO-VGSTIN-0009,Y
+V-010,CodeCraft Tools,5105,30,Coimbatore,DEMO-VGSTIN-0010,Y
+V-011,Collabora Suite,5105,30,Chennai,DEMO-VGSTIN-0011,Y
+V-012,SecureAuth Systems,5105,45,Chennai,DEMO-VGSTIN-0012,Y
+V-013,DataLens Analytics Licences,5105,45,Pune,DEMO-VGSTIN-0013,Y
+V-014,SkyWay Travel Desk,5106,15,Chennai,DEMO-VGSTIN-0014,Y
+V-015,StayWell Corporate Hotels,5106,15,Bengaluru,DEMO-VGSTIN-0015,Y
+V-016,CityCabs Corporate,5106,15,Mumbai,DEMO-VGSTIN-0016,Y
+V-017,PixelPulse Media,5107,30,Pune,DEMO-VGSTIN-0017,Y
+V-018,BrandBridge Agency,5107,45,Bengaluru,DEMO-VGSTIN-0018,Y
+V-019,EventSpark Productions,5107,30,Mumbai,DEMO-VGSTIN-0019,Y
+V-020,Ledger & Co Chartered Accountants,5108,30,Pune,DEMO-VGSTIN-0020,Y
+V-021,Lexicon Legal Associates,5108,30,Bengaluru,DEMO-VGSTIN-0021,Y
+V-022,Prism Advisory Services,5108,45,Bengaluru,DEMO-VGSTIN-0022,Y
+V-023,TalentBridge Search,5109,30,Hyderabad,DEMO-VGSTIN-0023,Y
+V-024,HireWell Consultants,5109,30,Hyderabad,DEMO-VGSTIN-0024,Y
+V-025,LearnForge Academy,5110,30,Hyderabad,DEMO-VGSTIN-0025,Y
+V-026,SkillSphere Training,5110,30,Chennai,DEMO-VGSTIN-0026,Y
+V-027,Suraksha General Insurance,5111,0,Bengaluru,DEMO-VGSTIN-0027,Y
+V-028,Medicare Group Health Cover,5111,0,Bengaluru,DEMO-VGSTIN-0028,Y
+V-029,OfficeMart Supplies,5112,15,Bengaluru,DEMO-VGSTIN-0029,Y
+V-030,PrintPoint Stationers,5112,15,Pune,DEMO-VGSTIN-0030,Y

@@ -1,0 +1,372 @@
+sheet,column,data_type,description,null_count,null_percent,distinct_values,example
+metric_dictionary,metric_id,text,Metric code (M01 ...).,0,0.0,28,M01
+metric_dictionary,metric_name,text,Metric name.,0,0.0,28,Headcount
+metric_dictionary,business_definition,text,Plain-language meaning.,0,0.0,28,Active employees on the last day of the month (permanent and
+metric_dictionary,formula,text,How it is calculated.,0,0.0,28,COUNT(DISTINCT employee_id) with hire_date <= month_end AND 
+metric_dictionary,source_table,text,Table(s) the metric comes from.,0,0.0,12,fact_headcount_monthly / dim_employee
+metric_dictionary,grain,text,Level of detail.,0,0.0,8,Department x month
+metric_dictionary,time_period,text,Period the metric covers.,0,0.0,7,Month end
+metric_dictionary,owner_team,text,Team that owns the definition.,0,0.0,5,HR Analytics
+metric_dictionary,unit,text,Unit of measure.,0,0.0,6,count
+metric_dictionary,good_direction,text,Whether higher or lower is better.,0,0.0,4,Context dependent
+metric_dictionary,caveat,text,Known limitation.,0,0.0,23,Excludes CEO if you compare departments only
+metric_dictionary,minimum_group_size,text,Smallest group that may be shown.,0,0.0,4,5
+data_contracts,feed,text,Data feed the contract belongs to.,0,0.0,4,AI anomaly results (fact_anomaly)
+data_contracts,column_name,text,Column covered by the contract.,0,0.0,39,result_id
+data_contracts,data_type,text,Expected type.,0,0.0,8,string
+data_contracts,nullable,text,Whether blanks are allowed.,0,0.0,2,no
+data_contracts,rule_or_allowed_values,text,Validation rule.,0,0.0,38,"unique, format AN-nnnn"
+data_contracts,description,text,Description.,0,0.0,38,Row id
+dq_checks_catalog,check_id,text,Check code.,0,0.0,14,DQ-C01
+dq_checks_catalog,check_name,text,Check name.,0,0.0,14,Payroll equals ledger
+dq_checks_catalog,description,text,Description.,0,0.0,14,Monthly payroll employer cost must equal ledger salary-relat
+dq_checks_catalog,logic_sql_or_rule,text,How to test it.,0,0.0,14,"SELECT month, p.cost - l.exp AS diff FROM payroll p JOIN led"
+dq_checks_catalog,severity,text,Critical or Warning.,0,0.0,2,Critical
+dq_checks_catalog,tolerance,text,Allowed difference.,0,0.0,8,0.01 INR
+dq_checks_catalog,frequency,text,How often the check runs.,0,0.0,4,Every load
+dq_checks_catalog,owner,text,Owner.,0,0.0,7,Finance Analytics
+dq_checks_catalog,fix_guidance,text,How to fix a failure.,0,0.0,14,Check the payroll posting entry for that run
+dim_date,date,date,Calendar date.,0,0.0,2557,2020-01-01
+dim_date,date_key,integer,Date as number YYYYMMDD.,0,0.0,2557,20200101
+dim_date,year,integer,Calendar year.,0,0.0,7,2020
+dim_date,quarter,integer,Calendar quarter.,0,0.0,4,1
+dim_date,month_number,integer,Month 1-12.,0,0.0,12,1
+dim_date,month_name,text,Month name.,0,0.0,12,January
+dim_date,year_month,text,Year and month as YYYY-MM.,0,0.0,84,2020-01
+dim_date,week_of_year,integer,ISO week number.,0,0.0,53,1
+dim_date,day_of_week,text,Day name.,0,0.0,7,Wednesday
+dim_date,is_weekend,text,Y for Saturday or Sunday.,0,0.0,2,N
+dim_date,is_holiday,text,Y if company holiday.,0,0.0,2,N
+dim_date,is_working_day,text,Y if Monday-Friday and not a holiday.,0,0.0,2,Y
+dim_date,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,8,FY2019-20
+dim_date,fiscal_quarter,text,Fiscal quarter (Q1 = April-June).,0,0.0,4,Q4
+dim_date,fiscal_month_number,integer,Month of the fiscal year (April = 1).,0,0.0,12,10
+dim_date,is_month_end,text,Y if last day of month.,0,0.0,2,N
+dim_date,month_start_date,date,First day of the month.,0,0.0,84,2020-01-01
+dim_date,month_end_date,date,Last day of the month.,0,0.0,84,2020-01-31
+dim_employee,employee_key,integer,"Surrogate key of one version of the employee in dim_employee (changes when department, role or manager changes).",0,0.0,1606,100000
+dim_employee,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,745,EMP-0001
+dim_employee,full_name,text,First and last name (fictional).,0,0.0,719,Ganesh Murthy
+dim_employee,gender,text,"Self-declared gender: Male, Female or Other. Use only for fairness testing, never as a model input.",0,0.0,3,Male
+dim_employee,date_of_birth,date,Date of birth (fictional).,0,0.0,710,1989-10-08
+dim_employee,hire_date,date,Date the employee joined.,0,0.0,650,2012-01-19
+dim_employee,exit_date,date,Last working day; blank for active employees.,1036,64.5,280,2020-01-24
+dim_employee,employment_status,text,"Active, Resigned, Terminated or Contract Ended.",0,0.0,4,Resigned
+dim_employee,employment_type,text,Permanent or Fixed-Term Contract. Contract staff have no PF/ESI.,0,0.0,2,Permanent
+dim_employee,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D01
+dim_employee,role_id,text,Job role code from the roles table.,0,0.0,58,R002
+dim_employee,role_title,text,Role title.,0,0.0,58,Associate Software Engineer
+dim_employee,job_level,integer,"Level 1 to 7 (1 Associate ... 6 Head, 7 CEO).",0,0.0,7,1
+dim_employee,manager_id,text,Employee id of the reporting manager at that time.,1,0.1,143,EMP-0051
+dim_employee,work_location,text,City of the office the employee is attached to.,0,0.0,9,Pune
+dim_employee,work_mode,text,"Onsite, Hybrid or Remote.",0,0.0,3,Hybrid
+dim_employee,highest_education,text,Highest qualification (may be blank).,0,0.0,28,B.E. Computer Science
+dim_employee,valid_from,date,Date this version of the employee starts.,0,0.0,1083,2012-01-19
+dim_employee,valid_to,date,Date this version ends (9999-12-31 if current).,0,0.0,780,2012-05-12
+dim_employee,is_current,text,Y for the latest version of the employee.,0,0.0,2,N
+dim_employee,change_reason,text,"Why the assignment changed: Joining, Promotion, Transfer, Manager Change or Manager Exit / Reassignment.",0,0.0,5,Joining
+dim_department,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+dim_department,department_name,text,Department name.,0,0.0,11,Executive Office
+dim_department,cost_center,text,Cost-centre code.,0,0.0,11,CC-000
+dim_department,description,text,Description.,0,0.0,11,Leadership & strategy
+dim_department,is_leadership,text,Y for the Executive Office.,0,0.0,2,Y
+dim_role,role_id,text,Job role code from the roles table.,0,0.0,58,R001
+dim_role,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+dim_role,role_title,text,Role title.,0,0.0,58,Chief Executive Officer
+dim_role,level,integer,"Level 1 to 7 (1 Associate ... 6 Head, 7 CEO).",0,0.0,7,7
+dim_role,grade,text,Level label.,0,0.0,7,L7 Executive Leadership
+dim_role,band_min_annual,integer,"Minimum annual fixed pay for the role (2026 reference, INR).",0,0.0,44,9600000
+dim_role,band_mid_annual,integer,Mid-point annual fixed pay for the role (INR).,0,0.0,44,12000000
+dim_role,band_max_annual,integer,Maximum annual fixed pay for the role (INR).,0,0.0,44,15600000
+dim_role,overtime_eligible,text,"Y if the role earns overtime pay (levels 1-2 in Support, HR, Finance, Operations).",0,0.0,2,N
+dim_role,band_reference_year,integer,Year the pay band refers to.,0,0.0,1,2026
+dim_location,work_location,text,City of the office the employee is attached to.,0,0.0,9,Bengaluru
+dim_location,state,text,State.,0,0.0,6,Karnataka
+dim_location,city_tier,text,City tier label.,0,0.0,3,Tier 1
+dim_location,tier_number,integer,City tier as number.,0,0.0,3,1
+dim_leave_type,leave_type_code,text,"Leave type: CL, SL, EL, ML, BL or LOP.",0,0.0,6,CL
+dim_leave_type,leave_type_name,text,Leave type name.,0,0.0,6,Casual Leave
+dim_leave_type,pay_type,text,Paid or Unpaid.,0,0.0,2,Paid
+dim_leave_type,annual_quota_days,integer,Annual quota in days.,0,0.0,5,12
+dim_leave_type,prorated_for_joiners,text,Y if the quota is prorated for new joiners.,0,0.0,2,Y
+dim_leave_type,carry_forward_allowed,text,Y if unused leave carries forward.,0,0.0,2,N
+dim_leave_type,max_carry_forward_days,integer,Maximum days that can be carried forward.,0,0.0,2,0
+dim_leave_type,policy_note,text,Policy note.,0,0.0,6,Short-notice personal leave
+dim_account,account_code,text,Ledger account code.,0,0.0,47,1000
+dim_account,account_name,text,Ledger account name.,0,0.0,47,Assets
+dim_account,account_type,text,"ASSET, LIABILITY, EQUITY, INCOME or EXPENSE.",0,0.0,5,ASSET
+dim_account,normal_balance,text,Side on which the account normally increases (DEBIT or CREDIT).,0,0.0,2,DEBIT
+dim_account,parent_code,text,Parent account group.,5,10.6,5,1000
+dim_account,is_group,text,"Y if the row is a heading, not a postable account.",0,0.0,2,Y
+dim_account,statement,text,Balance Sheet or Profit & Loss.,0,0.0,2,Balance Sheet
+dim_account,is_active,text,Y if the record is active.,0,0.0,1,Y
+dim_client,client_id,text,Client code (CL-001 ...).,0,0.0,28,CL-001
+dim_client,client_name,text,Fictional client company.,0,0.0,28,Meridian Retail Pvt Ltd
+dim_client,industry,text,Industry of the client.,0,0.0,20,Retail
+dim_client,city,text,City.,0,0.0,23,Chennai
+dim_client,state_or_region,text,State or region.,0,0.0,18,Tamil Nadu
+dim_client,country,text,Country code.,0,0.0,11,IN
+dim_client,client_type,text,DOMESTIC (18% GST) or EXPORT (zero-rated).,0,0.0,2,DOMESTIC
+dim_client,gst_registration,text,Fictional GST registration label (not a real number).,11,39.3,17,DEMO-GSTIN-0001
+dim_client,payment_terms_days,integer,Agreed payment terms in days.,0,0.0,3,30
+dim_client,payment_behaviour,text,"Typical payer type: prompt, normal, slow or risky.",0,0.0,4,normal
+dim_client,primary_service_line,text,Main revenue account for the client.,0,0.0,4,4001
+dim_client,contact_email,text,Fictional accounts e-mail.,0,0.0,28,accounts@meridian-demo.example
+dim_client,onboarded_on,date,Date the client was onboarded.,0,0.0,28,2020-02-06
+dim_client,is_active,text,Y if the record is active.,0,0.0,1,Y
+dim_vendor,vendor_id,text,Vendor code (V-001 ...).,0,0.0,30,V-001
+dim_vendor,vendor_name,text,Fictional vendor.,0,0.0,30,Skyline Realty Holdings
+dim_vendor,primary_expense_account,text,Main expense account of the vendor.,0,0.0,12,5101
+dim_vendor,payment_terms_days,integer,Agreed payment terms in days.,0,0.0,4,30
+dim_vendor,city,text,City.,0,0.0,6,Mumbai
+dim_vendor,gst_registration,text,Fictional GST registration label (not a real number).,0,0.0,30,DEMO-VGSTIN-0001
+dim_vendor,is_active,text,Y if the record is active.,0,0.0,1,Y
+dim_team,team_id,text,Team code (T01 ...).,0,0.0,16,T01
+dim_team,team_name,text,Team name.,0,0.0,16,Platform Core
+dim_team,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,9,D01
+dim_team,team_lead_employee_id,text,Employee leading the team.,1,6.2,15,EMP-0100
+dim_team,active_members,integer,Active members in the team.,0,0.0,14,35
+dim_team,planning_cadence,text,Planning rhythm.,0,0.0,1,2-week sprint
+dim_team,board_tool,text,Where the data comes from.,0,0.0,1,Full Stack task board (sample feed)
+dim_sprint,sprint_id,text,Sprint code (SP-01 ...).,0,0.0,38,SP-01
+dim_sprint,sprint_name,text,Sprint name.,0,0.0,38,Sprint 1
+dim_sprint,start_date,date,First day of leave.,0,0.0,38,2025-04-07
+dim_sprint,end_date,date,Last day of leave.,0,0.0,38,2025-04-18
+dim_sprint,working_days,integer,Working days in the sprint.,0,0.0,1,10
+dim_sprint,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,2,FY2025-26
+fact_payroll,payroll_item_id,text,Unique id of one employee-month pay calculation.,0,0.0,7344,PI-000001
+fact_payroll,run_id,text,Payroll run id (PR-YYYY-MM).,0,0.0,18,PR-2025-04
+fact_payroll,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,530,EMP-0002
+fact_payroll,date_key,integer,Date as number YYYYMMDD.,0,0.0,18,20250430
+fact_payroll,employee_key,integer,"Surrogate key of one version of the employee in dim_employee (changes when department, role or manager changes).",0,0.0,741,100009
+fact_payroll,period_end_date,date,Last day of the month the row covers.,0,0.0,18,2025-04-30
+fact_payroll,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D08
+fact_payroll,role_id,text,Job role code from the roles table.,0,0.0,57,R047
+fact_payroll,payable_days,decimal,Days paid = days employed minus loss-of-pay days.,0,0.0,44,30.0
+fact_payroll,lop_days,decimal,"Loss-of-pay days (unpaid absence, unpaid leave, half day = 0.5).",0,0.0,14,0.0
+fact_payroll,overtime_hours_paid,decimal,Overtime hours paid (capped at 50).,0,0.0,55,0.0
+fact_payroll,variable_pay_type,text,"Performance Bonus, Sales Incentive, Festival Bonus or Spot Award.",6192,84.3,4,Performance Bonus
+fact_payroll,monthly_fixed_gross,decimal,Full-month fixed gross entitlement (INR).,0,0.0,886,144460.0
+fact_payroll,basic,decimal,Basic salary earned in the month.,0,0.0,2338,57784.0
+fact_payroll,hra,decimal,House rent allowance earned.,0,0.0,2324,28892.0
+fact_payroll,conveyance,decimal,Conveyance allowance earned.,0,0.0,89,1600.0
+fact_payroll,medical,decimal,Medical allowance earned.,0,0.0,86,1250.0
+fact_payroll,special_allowance,decimal,Special allowance earned (balancing component).,0,0.0,2340,54934.0
+fact_payroll,earned_fixed_pay,decimal,Sum of fixed components after loss-of-pay proration.,0,0.0,2346,144460.0
+fact_payroll,overtime_pay,decimal,Overtime pay (2x hourly rate).,0,0.0,901,0.0
+fact_payroll,variable_pay,decimal,"Bonus, incentive or award paid in the month.",0,0.0,758,34670.4
+fact_payroll,gross_pay,decimal,Earned fixed pay + overtime + variable pay.,0,0.0,3845,179130.4
+fact_payroll,pf_employee,decimal,Employee provident fund deduction.,0,0.0,420,1800.0
+fact_payroll,esi_employee,decimal,Employee ESI deduction.,0,0.0,93,0.0
+fact_payroll,professional_tax,decimal,Professional tax deduction.,0,0.0,2,200.0
+fact_payroll,tds,decimal,Income tax deducted at source.,0,0.0,1247,18625.79
+fact_payroll,other_deductions,decimal,Other deductions (loan recovery).,0,0.0,8,0.0
+fact_payroll,total_deductions,decimal,Sum of all employee deductions.,0,0.0,1744,20625.79
+fact_payroll,net_pay,decimal,Take-home pay = gross pay minus total deductions.,0,0.0,3861,158504.61
+fact_payroll,pf_employer,decimal,Employer provident fund contribution.,0,0.0,420,1800.0
+fact_payroll,esi_employer,decimal,Employer ESI contribution.,0,0.0,93,0.0
+fact_payroll,employer_cost,decimal,Full cost to company = gross pay + employer PF + employer ESI.,0,0.0,3845,180930.4
+fact_payroll,headcount_flag,integer,Always 1: lets you SUM to count employees.,0,0.0,1,1
+fact_attendance_monthly,attendance_fact_id,text,Row id of the monthly attendance fact.,0,0.0,7343,FA-00001
+fact_attendance_monthly,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,528,EMP-0002
+fact_attendance_monthly,date_key,integer,Date as number YYYYMMDD.,0,0.0,18,20250430
+fact_attendance_monthly,employee_key,integer,"Surrogate key of one version of the employee in dim_employee (changes when department, role or manager changes).",0,0.0,740,100009
+fact_attendance_monthly,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D08
+fact_attendance_monthly,scheduled_days,decimal,Working days the employee was scheduled in the month.,0,0.0,23,20.0
+fact_attendance_monthly,present_days,decimal,Days present (office or work from home).,0,0.0,24,20.0
+fact_attendance_monthly,wfh_days,decimal,Days worked from home.,0,0.0,24,18.0
+fact_attendance_monthly,half_days_unpaid,decimal,Half days without pay.,0,0.0,4,0.0
+fact_attendance_monthly,paid_leave_days,decimal,Days on paid leave.,0,0.0,22,0.0
+fact_attendance_monthly,unpaid_absence_days,decimal,Unpaid absence and unpaid leave days.,0,0.0,10,0.0
+fact_attendance_monthly,late_arrivals,decimal,Late check-ins in the month.,0,0.0,10,1.0
+fact_attendance_monthly,avg_hours_worked,decimal,Average working hours per recorded day.,0,0.0,482,8.5
+fact_attendance_monthly,overtime_hours,decimal,Overtime hours recorded (only overtime-eligible roles).,0,0.0,55,0.0
+fact_attendance_monthly,attendance_rate,decimal,(Present days + 0.5 x half days) / scheduled days.,0,0.0,117,1.0
+fact_attendance_monthly,period_end_date,date,Last day of the month the row covers.,0,0.0,18,2025-04-30
+fact_leave,leave_request_id,text,Leave application id.,0,0.0,3441,LR-000137
+fact_leave,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,477,EMP-0034
+fact_leave,employee_key,integer,"Surrogate key of one version of the employee in dim_employee (changes when department, role or manager changes).",0,0.0,629,100149
+fact_leave,leave_type_code,text,"Leave type: CL, SL, EL, ML, BL or LOP.",0,0.0,6,CL
+fact_leave,start_date_key,integer,Start date as YYYYMMDD.,0,0.0,374,20250401
+fact_leave,end_date_key,integer,End date as YYYYMMDD.,0,0.0,376,20250407
+fact_leave,start_date,date,First day of leave.,0,0.0,374,2025-04-01
+fact_leave,end_date,date,Last day of leave.,0,0.0,376,2025-04-07
+fact_leave,days,decimal,Working days of leave.,0,0.0,9,5.0
+fact_leave,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,4,Approved
+fact_leave,applied_on,date,Date the leave was applied.,0,0.0,552,2025-03-29
+fact_leave,decided_on,date,Date the manager decided.,34,1.0,553,2025-04-01
+fact_leave,approver_id,text,Employee id of the approver (manager at that time).,12,0.3,98,EMP-0325
+fact_leave,reason,text,Reason given by the employee.,0,0.0,11,Child school event
+fact_headcount_monthly,date_key,integer,Date as number YYYYMMDD.,0,0.0,81,20200131
+fact_headcount_monthly,month_start_date,date,First day of the month.,0,0.0,81,2020-01-01
+fact_headcount_monthly,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+fact_headcount_monthly,headcount_start,integer,Headcount at start of month.,0,0.0,105,1
+fact_headcount_monthly,hires,integer,Employees who joined in the month.,0,0.0,10,0
+fact_headcount_monthly,exits,integer,Employees who left in the month.,0,0.0,6,0
+fact_headcount_monthly,voluntary_exits,integer,Resignations in the month.,0,0.0,5,0
+fact_headcount_monthly,transfers_in,integer,Employees transferred into the department.,0,0.0,2,0
+fact_headcount_monthly,transfers_out,integer,Employees transferred out of the department.,0,0.0,2,0
+fact_headcount_monthly,headcount_end,integer,Headcount at end of month.,0,0.0,106,1
+fact_headcount_monthly,attrition_rate_monthly_pct,decimal,Exits / headcount_start x 100.,0,0.0,98,0.0
+fact_ledger,line_id,text,Journal line id.,0,0.0,6784,JL-000001
+fact_ledger,entry_id,text,Journal entry id (JE-000001 ...).,0,0.0,2524,JE-000001
+fact_ledger,date_key,integer,Date as number YYYYMMDD.,0,0.0,398,20250401
+fact_ledger,entry_date,date,Posting date.,0,0.0,398,2025-04-01
+fact_ledger,posting_period,text,Accounting month (YYYY-MM).,0,0.0,18,2025-04
+fact_ledger,financial_year,text,"Indian financial year, for example FY2025-26 (April to March).",0,0.0,2,2025-26
+fact_ledger,account_code,text,Ledger account code.,0,0.0,40,1001
+fact_ledger,debit,decimal,Debit amount (INR).,0,0.0,2877,20400000.0
+fact_ledger,credit,decimal,Credit amount (INR).,0,0.0,2526,0.0
+fact_ledger,signed_amount_debit_positive,decimal,Debit minus credit.,0,0.0,5401,20400000.0
+fact_ledger,cost_center_department_id,text,Department the amount is charged to.,5688,83.8,11,D09
+fact_ledger,source_type,text,"What created the entry: PAYROLL_RUN, SALARY_PAYMENT, STATUTORY_REMITTANCE, INVOICE, INVOICE_PAYMENT, EXPENSE, EXPENSE_PAYMENT, GST_SETTLEMENT, DEPRECIATION, BANK_CHARGES, INTEREST, MANUAL or OPENING.",0,0.0,13,OPENING
+fact_ledger,source_id,text,Id of the source document.,0,0.0,1978,OB-2025
+fact_invoice,invoice_id,text,Invoice id (INV-00001 ...).,0,0.0,743,INV-00001
+fact_invoice,invoice_number,text,Invoice number shown to the client (INV/FY/0001).,0,0.0,743,INV/2024-25/0001
+fact_invoice,client_id,text,Client code (CL-001 ...).,0,0.0,28,CL-008
+fact_invoice,invoice_date_key,integer,Invoice date as YYYYMMDD.,0,0.0,365,20250203
+fact_invoice,invoice_date,date,Date the invoice was issued.,0,0.0,365,2025-02-03
+fact_invoice,due_date,date,Payment due date.,0,0.0,412,2025-03-20
+fact_invoice,service_line_account,text,Revenue account the invoice is booked to.,0,0.0,4,4004
+fact_invoice,subtotal,decimal,Invoice amount before GST.,0,0.0,730,1583500.0
+fact_invoice,gst_rate_percent,decimal,"GST rate (18 for domestic, 0 for export).",0,0.0,2,18.0
+fact_invoice,gst_amount,decimal,GST amount.,0,0.0,608,285030.0
+fact_invoice,total_amount,decimal,Invoice total including GST (or expense total including GST).,0,0.0,734,1868530.0
+fact_invoice,amount_paid,decimal,Total received against the invoice.,0,0.0,674,1868530.0
+fact_invoice,balance_due,decimal,Amount still unpaid.,0,0.0,65,0.0
+fact_invoice,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,6,PAID
+fact_invoice,last_payment_date,date,Date of the last receipt.,66,8.9,300,2025-04-01
+fact_invoice,days_to_pay,decimal,Days from invoice date to last payment.,66,8.9,108,57.0
+fact_invoice,days_past_due_at_cutoff,integer,Days past due at 30 Sep 2026 for unpaid invoices.,0,0.0,14,0
+fact_invoice,ageing_bucket_at_cutoff,text,Receivable ageing bucket at 30 Sep 2026.,0,0.0,5,Settled / n.a.
+fact_invoice,carried_in_from_prior_period,text,Y if invoiced before 1 April 2025 and still open on that date.,0,0.0,2,Y
+fact_invoice,ledger_entry_id,text,Journal entry created for this document.,56,7.5,687,JE-000007
+fact_invoice_payment,payment_id,text,Receipt id.,0,0.0,709,PAY-00001
+fact_invoice_payment,invoice_id,text,Invoice id (INV-00001 ...).,0,0.0,677,INV-00001
+fact_invoice_payment,payment_date_key,integer,Payment date as YYYYMMDD.,0,0.0,304,20250401
+fact_invoice_payment,payment_date,date,Date the payment was received.,0,0.0,304,2025-04-01
+fact_invoice_payment,amount,decimal,Amount (INR).,0,0.0,705,1868530.0
+fact_invoice_payment,payment_mode,text,"NEFT, RTGS, Wire Transfer, UPI Business.",0,0.0,4,NEFT
+fact_invoice_payment,reference_no,text,Bank reference (fictional).,0,0.0,709,UTR3308846165
+fact_invoice_payment,received_by,text,User who recorded the receipt.,0,0.0,17,U-0097
+fact_invoice_payment,ledger_entry_id,text,Journal entry created for this document.,0,0.0,709,JE-000012
+fact_expense,expense_id,text,Expense bill id.,0,0.0,501,EXP-00001
+fact_expense,expense_date,date,Bill date.,0,0.0,272,2025-04-01
+fact_expense,expense_date_key,integer,Expense date as YYYYMMDD.,0,0.0,272,20250401
+fact_expense,category_account,text,Expense account.,0,0.0,12,5101
+fact_expense,vendor_id,text,Vendor code (V-001 ...).,0,0.0,30,V-002
+fact_expense,bill_reference,text,Vendor bill reference.,0,0.0,501,BILL-2504-9791
+fact_expense,description,text,Description.,0,0.0,166,Monthly office rent
+fact_expense,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,9,D09
+fact_expense,amount_excl_gst,decimal,Amount before GST.,0,0.0,499,70650.0
+fact_expense,gst_rate_percent,decimal,"GST rate (18 for domestic, 0 for export).",0,0.0,3,18.0
+fact_expense,gst_amount,decimal,GST amount.,0,0.0,501,12717.0
+fact_expense,total_amount,decimal,Invoice total including GST (or expense total including GST).,0,0.0,501,83367.0
+fact_expense,due_date,date,Payment due date.,0,0.0,305,2025-04-16
+fact_expense,paid_date,date,Date the bill was paid; blank if unpaid.,23,4.6,248,2025-04-10
+fact_expense,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,2,PAID
+fact_expense,payment_mode,text,"NEFT, RTGS, Wire Transfer, UPI Business.",23,4.6,1,NEFT
+fact_expense,submitted_by,text,Employee who submitted the bill.,0,0.0,196,EMP-0148
+fact_expense,approved_by,text,Id of the person who approved.,0,0.0,9,EMP-0121
+fact_expense,ledger_entry_id,text,Journal entry created for this document.,0,0.0,501,JE-000002
+fact_expense,payment_ledger_entry_id,text,Journal entry for the vendor payment.,23,4.6,478,JE-000044
+fact_task,task_id,text,Task id (TASK-00001 ...).,0,0.0,28868,TASK-00001
+fact_task,team_id,text,Team code (T01 ...).,0,0.0,16,T01
+fact_task,sprint_id,text,Sprint code (SP-01 ...).,0,0.0,38,SP-01
+fact_task,assignee_employee_id,text,Employee the task is assigned to.,0,0.0,492,EMP-0365
+fact_task,task_type,text,"Feature, Bug, Chore or Spike.",0,0.0,4,Bug
+fact_task,priority,text,P1 (highest) to P4.,0,0.0,4,P2
+fact_task,story_points,integer,"Effort estimate (1, 2, 3, 5, 8, 13).",0,0.0,6,1
+fact_task,created_date,date,Date the task was created.,0,0.0,418,2025-04-01
+fact_task,started_date,date,Date work started.,954,3.3,266,2025-04-08
+fact_task,due_date,date,Payment due date.,0,0.0,38,2025-04-18
+fact_task,completed_date,date,Date the task was completed.,4737,16.4,391,2025-04-10
+fact_task,status,text,Status of the record (meaning depends on the sheet; see sheet description).,0,0.0,5,Done
+fact_task,reopened_count,integer,How many times the task was reopened.,0,0.0,3,0
+fact_task,cycle_time_days,decimal,Days from start to completion.,4737,16.4,30,2.0
+fact_task,is_overdue_at_cutoff,text,Y if not finished and due date is past at 30 Sep 2026.,0,0.0,2,N
+fact_task,completed_on_time,text,Y if completed on or before due date (Done tasks only).,4737,16.4,2,Y
+fact_anomaly,result_id,text,Anomaly result id (AN-0001 ...).,0,0.0,405,AN-0001
+fact_anomaly,source_dataset,text,Dataset that was scored.,0,0.0,2,attendance_monthly_features
+fact_anomaly,record_id,text,Id of the scored record.,0,0.0,405,AF-03170
+fact_anomaly,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,225,EMP-0356
+fact_anomaly,period,date,Period of the scored record.,0,0.0,18,2025-07-01
+fact_anomaly,anomaly_score,decimal,0 to 1; higher means more unusual.,0,0.0,222,1.0
+fact_anomaly,flagged,text,Y if above the model threshold.,0,0.0,1,Y
+fact_anomaly,reason_code,text,Machine reason code.,0,0.0,11,NO_ATTENDANCE
+fact_anomaly,reason_text,text,Plain-English reason.,0,0.0,30,No presence recorded for the whole month
+fact_anomaly,money_at_risk,decimal,Estimated money exposure (payroll rows).,221,54.6,174,347844.46
+fact_anomaly,model_version,text,Model that produced the row.,0,0.0,2,iforest-attendance-0.1
+fact_anomaly,scored_at,timestamp,When scoring ran.,0,0.0,1,2026-10-01 02:00:00
+fact_anomaly,period_key,integer,Period as YYYYMMDD.,0,0.0,18,20250731
+fact_attrition_risk,prediction_id,text,Prediction id.,0,0.0,430,AR-0001
+fact_attrition_risk,employee_id,text,Unique employee code (EMP-0001 ...). Same code in every table and every workbook.,0,0.0,430,EMP-0002
+fact_attrition_risk,as_of_date_key,integer,As-of date as YYYYMMDD.,0,0.0,2,20260930
+fact_attrition_risk,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,10,D08
+fact_attrition_risk,as_of_date,date,Date the snapshot or prediction refers to.,0,0.0,2,2026-09-30
+fact_attrition_risk,risk_score_12m,decimal,Probability of leaving within 12 months (0-1).,0,0.0,84,0.035
+fact_attrition_risk,risk_band,text,"Low, Medium or High (High = top 10%).",0,0.0,3,Low
+fact_attrition_risk,top_reason_1,text,Strongest driver of the score.,0,0.0,152,Total experience years (31.8)
+fact_attrition_risk,top_reason_2,text,Second driver.,0,0.0,122,Low engagement score (2.2/5)
+fact_attrition_risk,top_reason_3,text,Third driver.,0,0.0,118,Wfh share 3m (0.9)
+fact_attrition_risk,model_version,text,Model that produced the row.,0,0.0,1,attrition-logreg-baseline-0.1
+fact_attrition_risk,model_note,text,Caveat shown with the prediction.,0,0.0,1,"Baseline demo model: a support signal for HR, never a decisi"
+fact_attrition_risk,employee_key,integer,"Surrogate key of one version of the employee in dim_employee (changes when department, role or manager changes).",0,0.0,430,100009
+fact_forecast,forecast_id,text,Forecast id.,0,0.0,72,FC-0001
+fact_forecast,metric,text,Forecast metric.,0,0.0,2,headcount_end
+fact_forecast,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,ALL
+fact_forecast,forecast_month,date,Month being forecast.,0,0.0,6,2026-10-01
+fact_forecast,forecast_value,decimal,Point forecast.,0,0.0,62,426.3
+fact_forecast,lower_80,decimal,Lower bound of the 80% range.,0,0.0,63,417.5
+fact_forecast,upper_80,decimal,Upper bound of the 80% range.,0,0.0,65,435.1
+fact_forecast,method,text,Forecast method.,0,0.0,2,linear trend (36m) + half-strength seasonality
+fact_forecast,trained_through,text,Last month of actual data used.,0,0.0,1,2026-09
+fact_forecast,model_version,text,Model that produced the row.,0,0.0,1,trend-seasonal-baseline-0.1
+fact_forecast,forecast_month_key,integer,Forecast month-end as YYYYMMDD.,0,0.0,6,20261031
+budget_payroll_dept_month,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+budget_payroll_dept_month,month,date,Month (first day).,0,0.0,18,2025-04-01
+budget_payroll_dept_month,budget_payroll_cost,decimal,Planned payroll employer cost for the department and month (INR).,0,0.0,195,479000.0
+kpi_targets,month,date,Month (first day).,0,0.0,18,2025-04-01
+kpi_targets,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,10,D01
+kpi_targets,attendance_rate_target,decimal,Target attendance rate.,0,0.0,1,0.94
+kpi_targets,overtime_share_target_pct,decimal,Target overtime share of payroll cost (percent).,0,0.0,2,0.5
+kpi_targets,attrition_monthly_target_pct,decimal,Target monthly attrition (percent).,0,0.0,1,1.0
+kpi_targets,task_completion_target_pct,decimal,Target task completion rate (percent).,18,10.0,1,80.0
+reconciliation_answer_key,month,text,Month (first day).,0,0.0,18,2025-04-01
+reconciliation_answer_key,employees_paid,integer,Number of employees in the run.,0,0.0,13,386
+reconciliation_answer_key,payroll_gross_pay,decimal,Payroll gross pay for the month (clean).,0,0.0,18,52740110.43
+reconciliation_answer_key,payroll_net_pay,decimal,Payroll net pay for the month (clean).,0,0.0,18,46035111.16
+reconciliation_answer_key,payroll_employer_cost,decimal,Payroll employer cost (clean).,0,0.0,18,53363392.08
+reconciliation_answer_key,ledger_salary_related_expense,decimal,Ledger accounts 5001-5005 for the month.,0,0.0,18,53363392.08
+reconciliation_answer_key,ledger_revenue,decimal,Ledger revenue for the month.,0,0.0,18,71075300.0
+reconciliation_answer_key,ledger_total_expense,decimal,Ledger total expense.,0,0.0,18,64761237.08
+reconciliation_answer_key,ledger_net_profit,decimal,Ledger revenue minus expense.,0,0.0,18,6314062.92
+reconciliation_answer_key,bank_closing_balance,decimal,Bank balance at month end (INR).,0,0.0,18,61077351.3
+reconciliation_answer_key,receivables_closing_balance,decimal,Receivables at month end (INR).,0,0.0,18,139302921.6
+reconciliation_answer_key,payroll_vs_ledger_difference,decimal,Payroll cost minus ledger cost (0 when clean).,0,0.0,1,0.0
+reference_summary_dept_month,department_id,text,Department code (D00 Executive ... D10 Legal & Compliance).,0,0.0,11,D00
+reference_summary_dept_month,month,date,Month (first day).,0,0.0,18,2025-04-01
+reference_summary_dept_month,employer_cost,decimal,Full cost to company = gross pay + employer PF + employer ESI.,0,0.0,189,480809.0
+reference_summary_dept_month,gross_pay,decimal,Earned fixed pay + overtime + variable pay.,0,0.0,189,479009.0
+reference_summary_dept_month,overtime_pay,decimal,Overtime pay (2x hourly rate).,0,0.0,73,0.0
+reference_summary_dept_month,employees_paid,integer,Number of employees in the run.,0,0.0,52,1
+reference_summary_dept_month,overtime_hours,decimal,Overtime hours recorded (only overtime-eligible roles).,0,0.0,70,0.0
+reference_summary_dept_month,late_arrivals,decimal,Late check-ins in the month.,0,0.0,80,1.0
+reference_summary_dept_month,attendance_rate,decimal,(Present days + 0.5 x half days) / scheduled days.,0,0.0,170,0.95
+reference_summary_dept_month,headcount_end,integer,Headcount at end of month.,0,0.0,53,1
+reference_summary_dept_month,hires,integer,Employees who joined in the month.,0,0.0,7,0
+reference_summary_dept_month,exits,integer,Employees who left in the month.,0,0.0,4,0
+reference_summary_dept_month,attrition_rate_monthly_pct,decimal,Exits / headcount_start x 100.,0,0.0,43,0.0
+reference_summary_dept_month,tasks,decimal,Tasks planned (not cancelled).,36,18.2,117,522.0
+reference_summary_dept_month,tasks_done,decimal,Tasks completed.,36,18.2,116,474.0
+reference_summary_dept_month,story_points_done,decimal,Story points completed.,36,18.2,147,1648.0
+reference_summary_dept_month,task_completion_rate_pct,decimal,Done / planned x 100.,36,18.2,111,90.8
+reference_summary_dept_month,cost_per_head,decimal,Employer cost per paid employee.,0,0.0,189,480809.0
+reference_summary_dept_month,overtime_share_pct,decimal,Overtime pay as % of employer cost.,0,0.0,65,0.0
+dq_known_issues,issue_id,text,Planted-issue id.,0,0.0,11,DQ-01
+dq_known_issues,table_name,text,Table with the problem.,0,0.0,9,fact_attendance_monthly
+dq_known_issues,issue_type,text,Type of issue.,0,0.0,11,ATTENDANCE_AFTER_EXIT
+dq_known_issues,affected_record_ids,text,Records affected.,0,0.0,11,"FA-X0001, FA-X0002, FA-X0003, FA-X0004"
+dq_known_issues,description,text,Description.,0,0.0,11,Attendance recorded for the month after the employee left th
+dq_known_issues,check_that_should_catch_it,text,Check that should find it.,0,0.0,11,No attendance after employee exit_date
+dq_known_issues,effect_on_totals,text,Effect on totals.,0,0.0,11,Adds 4 extra employee-months to attendance totals

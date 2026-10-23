@@ -1,0 +1,406 @@
+result_id,source_dataset,record_id,employee_id,period,anomaly_score,flagged,reason_code,reason_text,money_at_risk,model_version,scored_at,period_key
+AN-0001,attendance_monthly_features,AF-03170,EMP-0356,2025-07-01,1.0,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0002,attendance_monthly_features,AF-05918,EMP-0585,2025-09-01,0.998,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0003,attendance_monthly_features,AF-06802,EMP-0646,2026-06-01,0.998,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0004,attendance_monthly_features,AF-02819,EMP-0318,2026-06-01,0.998,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0005,attendance_monthly_features,AF-03112,EMP-0347,2026-09-01,0.992,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0006,attendance_monthly_features,AF-06635,EMP-0633,2026-08-01,0.992,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0007,attendance_monthly_features,AF-05447,EMP-0553,2026-09-01,0.992,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0008,attendance_monthly_features,AF-07324,EMP-0730,2026-09-01,0.991,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0009,attendance_monthly_features,AF-05875,EMP-0582,2026-01-01,0.991,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0010,attendance_monthly_features,AF-02087,EMP-0246,2025-08-01,0.991,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0011,attendance_monthly_features,AF-00494,EMP-0056,2025-11-01,0.99,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0012,attendance_monthly_features,AF-00736,EMP-0087,2026-05-01,0.99,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0013,attendance_monthly_features,AF-04333,EMP-0460,2025-10-01,0.99,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0014,attendance_monthly_features,AF-05661,EMP-0570,2025-11-01,0.99,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0015,attendance_monthly_features,AF-06443,EMP-0619,2026-08-01,0.99,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0016,attendance_monthly_features,AF-03098,EMP-0347,2025-07-01,0.925,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0017,attendance_monthly_features,AF-04681,EMP-0494,2025-09-01,0.916,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0018,attendance_monthly_features,AF-01620,EMP-0188,2025-04-01,0.914,Y,LONG_UNPAID_ABSENCE,14 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0019,attendance_monthly_features,AF-01480,EMP-0158,2026-07-01,0.892,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0020,attendance_monthly_features,AF-02473,EMP-0285,2026-08-01,0.886,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0021,attendance_monthly_features,AF-02651,EMP-0305,2025-12-01,0.882,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0022,attendance_monthly_features,AF-06074,EMP-0594,2026-07-01,0.871,Y,LONG_UNPAID_ABSENCE,14 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0023,attendance_monthly_features,AF-02205,EMP-0256,2025-09-01,0.87,Y,LONG_UNPAID_ABSENCE,12 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0024,attendance_monthly_features,AF-04604,EMP-0484,2025-12-01,0.868,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0025,attendance_monthly_features,AF-04182,EMP-0447,2026-08-01,0.866,Y,LONG_UNPAID_ABSENCE,14 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0026,attendance_monthly_features,AF-02143,EMP-0249,2026-07-01,0.863,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0027,attendance_monthly_features,AF-01343,EMP-0147,2026-01-01,0.863,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0028,attendance_monthly_features,AF-00927,EMP-0100,2025-10-01,0.862,Y,LONG_UNPAID_ABSENCE,14 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0029,attendance_monthly_features,AF-04406,EMP-0466,2026-09-01,0.862,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0030,attendance_monthly_features,AF-02170,EMP-0254,2025-10-01,0.858,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0031,attendance_monthly_features,AF-00792,EMP-0092,2026-07-01,0.857,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0032,attendance_monthly_features,AF-01599,EMP-0184,2026-07-01,0.857,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0033,attendance_monthly_features,AF-05048,EMP-0522,2026-07-01,0.857,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0034,attendance_monthly_features,AF-03208,EMP-0361,2026-07-01,0.857,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0035,attendance_monthly_features,AF-07269,EMP-0709,2026-06-01,0.854,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0036,attendance_monthly_features,AF-07063,EMP-0673,2026-01-01,0.851,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0037,attendance_monthly_features,AF-06601,EMP-0630,2026-02-01,0.85,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0038,attendance_monthly_features,AF-05047,EMP-0522,2026-06-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0039,attendance_monthly_features,AF-03207,EMP-0361,2026-06-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0040,attendance_monthly_features,AF-05029,EMP-0521,2026-06-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0041,attendance_monthly_features,AF-02738,EMP-0313,2025-09-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0042,attendance_monthly_features,AF-02741,EMP-0313,2025-12-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0043,attendance_monthly_features,AF-02904,EMP-0329,2025-12-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0044,attendance_monthly_features,AF-00791,EMP-0092,2026-06-01,0.849,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0045,attendance_monthly_features,AF-02737,EMP-0313,2025-08-01,0.848,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0046,attendance_monthly_features,AF-02905,EMP-0329,2026-01-01,0.848,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0047,attendance_monthly_features,AF-03908,EMP-0426,2026-02-01,0.847,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0048,attendance_monthly_features,AF-00345,EMP-0041,2026-03-01,0.846,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0049,attendance_monthly_features,AF-04174,EMP-0447,2025-12-01,0.845,Y,LONG_UNPAID_ABSENCE,13 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0050,attendance_monthly_features,AF-04263,EMP-0456,2025-12-01,0.845,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0051,attendance_monthly_features,AF-05030,EMP-0521,2026-07-01,0.845,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0052,attendance_monthly_features,AF-06914,EMP-0656,2026-08-01,0.844,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0053,attendance_monthly_features,AF-05809,EMP-0578,2026-03-01,0.843,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0054,attendance_monthly_features,AF-03210,EMP-0361,2026-09-01,0.837,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0055,attendance_monthly_features,AF-03209,EMP-0361,2026-08-01,0.837,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0056,attendance_monthly_features,AF-00793,EMP-0092,2026-08-01,0.837,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0057,attendance_monthly_features,AF-01601,EMP-0184,2026-09-01,0.837,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0058,attendance_monthly_features,AF-01600,EMP-0184,2026-08-01,0.837,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0059,attendance_monthly_features,AF-04665,EMP-0489,2026-07-01,0.834,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0060,attendance_monthly_features,AF-05045,EMP-0522,2026-04-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0061,attendance_monthly_features,AF-05028,EMP-0521,2026-05-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0062,attendance_monthly_features,AF-02902,EMP-0329,2025-10-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0063,attendance_monthly_features,AF-02907,EMP-0329,2026-03-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0064,attendance_monthly_features,AF-02740,EMP-0313,2025-11-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0065,attendance_monthly_features,AF-02739,EMP-0313,2025-10-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0066,attendance_monthly_features,AF-02906,EMP-0329,2026-02-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0067,attendance_monthly_features,AF-00789,EMP-0092,2026-04-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0068,attendance_monthly_features,AF-00790,EMP-0092,2026-05-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0069,attendance_monthly_features,AF-02903,EMP-0329,2025-11-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0070,attendance_monthly_features,AF-05027,EMP-0521,2026-04-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0071,attendance_monthly_features,AF-05044,EMP-0522,2026-03-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0072,attendance_monthly_features,AF-05025,EMP-0521,2026-02-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0073,attendance_monthly_features,AF-05046,EMP-0522,2026-05-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0074,attendance_monthly_features,AF-05026,EMP-0521,2026-03-01,0.833,Y,NO_ATTENDANCE,No presence recorded for the whole month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0075,attendance_monthly_features,AF-03762,EMP-0414,2025-12-01,0.827,Y,LONG_UNPAID_ABSENCE,12 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0076,attendance_monthly_features,AF-01598,EMP-0184,2026-06-01,0.821,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0077,attendance_monthly_features,AF-03424,EMP-0382,2026-07-01,0.821,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0078,attendance_monthly_features,AF-02766,EMP-0314,2026-07-01,0.821,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0079,attendance_monthly_features,AF-05043,EMP-0522,2026-02-01,0.819,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0080,attendance_monthly_features,AF-02742,EMP-0313,2026-01-01,0.814,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0081,attendance_monthly_features,AF-03086,EMP-0346,2026-01-01,0.814,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0082,attendance_monthly_features,AF-01872,EMP-0218,2025-12-01,0.814,Y,LONG_UNPAID_ABSENCE,11 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0083,attendance_monthly_features,AF-07135,EMP-0683,2026-03-01,0.813,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0084,attendance_monthly_features,AF-02047,EMP-0244,2025-04-01,0.813,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0085,attendance_monthly_features,AF-06990,EMP-0664,2026-04-01,0.805,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0086,attendance_monthly_features,AF-05439,EMP-0553,2026-01-01,0.798,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0087,attendance_monthly_features,AF-01106,EMP-0125,2025-10-01,0.796,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0088,attendance_monthly_features,AF-06818,EMP-0648,2025-10-01,0.795,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0089,attendance_monthly_features,AF-03460,EMP-0388,2026-06-01,0.794,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0090,attendance_monthly_features,AF-00144,EMP-0019,2025-08-01,0.791,Y,LONG_UNPAID_ABSENCE,10 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0091,attendance_monthly_features,AF-00851,EMP-0096,2025-06-01,0.782,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0092,attendance_monthly_features,AF-03206,EMP-0361,2026-05-01,0.781,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0093,attendance_monthly_features,AF-01814,EMP-0208,2026-01-01,0.775,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0094,attendance_monthly_features,AF-01848,EMP-0212,2025-11-01,0.771,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0095,attendance_monthly_features,AF-06369,EMP-0615,2025-10-01,0.771,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0096,attendance_monthly_features,AF-04715,EMP-0499,2025-07-01,0.771,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0097,attendance_monthly_features,AF-06186,EMP-0601,2025-10-01,0.768,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0098,attendance_monthly_features,AF-05545,EMP-0561,2025-07-01,0.766,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0099,attendance_monthly_features,AF-04599,EMP-0484,2025-07-01,0.759,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0100,attendance_monthly_features,AF-04538,EMP-0480,2026-06-01,0.756,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0101,attendance_monthly_features,AF-02322,EMP-0274,2025-04-01,0.748,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0102,attendance_monthly_features,AF-01115,EMP-0125,2026-07-01,0.748,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0103,attendance_monthly_features,AF-04371,EMP-0464,2025-04-01,0.743,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0104,attendance_monthly_features,AF-01667,EMP-0190,2026-03-01,0.742,Y,LONG_UNPAID_ABSENCE,9 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0105,attendance_monthly_features,AF-04228,EMP-0452,2025-11-01,0.741,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0106,attendance_monthly_features,AF-01213,EMP-0135,2025-09-01,0.739,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0107,attendance_monthly_features,AF-04439,EMP-0469,2026-03-01,0.739,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0108,attendance_monthly_features,AF-05244,EMP-0539,2026-07-01,0.738,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0109,attendance_monthly_features,AF-02171,EMP-0254,2025-11-01,0.736,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0110,attendance_monthly_features,AF-06679,EMP-0637,2025-08-01,0.736,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0111,attendance_monthly_features,AF-02951,EMP-0332,2025-05-01,0.735,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0112,attendance_monthly_features,AF-07224,EMP-0698,2026-05-01,0.733,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0113,attendance_monthly_features,AF-06364,EMP-0614,2025-10-01,0.731,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0114,attendance_monthly_features,AF-05392,EMP-0549,2026-06-01,0.731,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0115,attendance_monthly_features,AF-05949,EMP-0587,2025-04-01,0.73,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0116,attendance_monthly_features,AF-00623,EMP-0071,2026-02-01,0.726,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0117,attendance_monthly_features,AF-00266,EMP-0034,2025-04-01,0.725,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0118,attendance_monthly_features,AF-00761,EMP-0089,2025-06-01,0.718,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0119,attendance_monthly_features,AF-00788,EMP-0092,2026-03-01,0.717,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0120,attendance_monthly_features,AF-00065,EMP-0011,2026-02-01,0.717,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0121,attendance_monthly_features,AF-05264,EMP-0541,2026-02-01,0.717,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0122,attendance_monthly_features,AF-00852,EMP-0096,2025-07-01,0.715,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0123,attendance_monthly_features,AF-00458,EMP-0051,2026-08-01,0.715,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0124,attendance_monthly_features,AF-02350,EMP-0275,2026-04-01,0.713,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0125,attendance_monthly_features,AF-02697,EMP-0308,2025-04-01,0.711,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0126,attendance_monthly_features,AF-00794,EMP-0092,2026-09-01,0.71,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0127,attendance_monthly_features,AF-00263,EMP-0032,2026-07-01,0.71,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0128,attendance_monthly_features,AF-06413,EMP-0618,2025-06-01,0.708,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0129,attendance_monthly_features,AF-07209,EMP-0695,2026-05-01,0.708,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0130,attendance_monthly_features,AF-06738,EMP-0641,2026-02-01,0.705,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0131,attendance_monthly_features,AF-01455,EMP-0157,2025-12-01,0.699,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0132,attendance_monthly_features,AF-04386,EMP-0464,2026-07-01,0.696,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0133,attendance_monthly_features,AF-06133,EMP-0598,2025-06-01,0.693,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0134,attendance_monthly_features,AF-03378,EMP-0376,2025-09-01,0.689,Y,LONG_UNPAID_ABSENCE,8 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0135,attendance_monthly_features,AF-00875,EMP-0097,2025-12-01,0.689,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0136,attendance_monthly_features,AF-01863,EMP-0217,2025-05-01,0.687,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0137,attendance_monthly_features,AF-03671,EMP-0406,2026-03-01,0.686,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0138,attendance_monthly_features,AF-06206,EMP-0603,2025-05-01,0.684,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0139,attendance_monthly_features,AF-03013,EMP-0338,2025-04-01,0.682,Y,LONG_UNPAID_ABSENCE,7 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0140,attendance_monthly_features,AF-06218,EMP-0604,2026-03-01,0.681,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0141,attendance_monthly_features,AF-07078,EMP-0675,2026-06-01,0.68,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0142,attendance_monthly_features,AF-01500,EMP-0161,2026-09-01,0.679,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0143,attendance_monthly_features,AF-07051,EMP-0671,2026-01-01,0.678,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0144,attendance_monthly_features,AF-01426,EMP-0155,2025-08-01,0.675,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0145,attendance_monthly_features,AF-07219,EMP-0697,2026-05-01,0.673,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0146,attendance_monthly_features,AF-01373,EMP-0149,2025-07-01,0.673,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0147,attendance_monthly_features,AF-00122,EMP-0016,2025-04-01,0.673,Y,LONG_UNPAID_ABSENCE,7 consecutive unpaid absence days,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0148,attendance_monthly_features,AF-01789,EMP-0207,2025-06-01,0.67,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0149,attendance_monthly_features,AF-01504,EMP-0169,2025-07-01,0.668,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0150,attendance_monthly_features,AF-06445,EMP-0620,2025-06-01,0.662,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0151,attendance_monthly_features,AF-05811,EMP-0578,2026-05-01,0.656,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0152,attendance_monthly_features,AF-07079,EMP-0675,2026-07-01,0.656,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0153,attendance_monthly_features,AF-02251,EMP-0261,2026-07-01,0.655,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0154,attendance_monthly_features,AF-03674,EMP-0406,2026-06-01,0.652,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0155,attendance_monthly_features,AF-04357,EMP-0463,2025-08-01,0.65,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0156,attendance_monthly_features,AF-00668,EMP-0075,2025-05-01,0.648,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0157,attendance_monthly_features,AF-05049,EMP-0522,2026-08-01,0.648,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0158,attendance_monthly_features,AF-00582,EMP-0065,2025-09-01,0.646,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0159,attendance_monthly_features,AF-03767,EMP-0414,2026-05-01,0.643,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0160,attendance_monthly_features,AF-05702,EMP-0572,2026-04-01,0.64,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0161,attendance_monthly_features,AF-04978,EMP-0518,2025-11-01,0.638,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0162,attendance_monthly_features,AF-07337,EMP-0743,2026-09-01,0.636,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0163,attendance_monthly_features,AF-01031,EMP-0115,2025-04-01,0.634,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0164,attendance_monthly_features,AF-05385,EMP-0549,2025-11-01,0.632,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0165,attendance_monthly_features,AF-06926,EMP-0658,2025-12-01,0.628,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0166,attendance_monthly_features,AF-00532,EMP-0059,2026-01-01,0.627,Y,FREQUENT_LATE,15 late arrivals this month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0167,attendance_monthly_features,AF-05060,EMP-0524,2026-01-01,0.627,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0168,attendance_monthly_features,AF-07273,EMP-0710,2026-06-01,0.624,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0169,attendance_monthly_features,AF-00994,EMP-0110,2025-05-01,0.62,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0170,attendance_monthly_features,AF-03084,EMP-0346,2025-11-01,0.619,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0171,attendance_monthly_features,AF-01178,EMP-0133,2025-10-01,0.618,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251031
+AN-0172,attendance_monthly_features,AF-05628,EMP-0568,2026-02-01,0.617,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0173,attendance_monthly_features,AF-06665,EMP-0636,2025-08-01,0.616,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0174,attendance_monthly_features,AF-06693,EMP-0638,2025-08-01,0.614,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0175,attendance_monthly_features,AF-06598,EMP-0630,2025-11-01,0.614,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0176,attendance_monthly_features,AF-06659,EMP-0635,2026-04-01,0.612,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260430
+AN-0177,attendance_monthly_features,AF-00243,EMP-0031,2026-05-01,0.611,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0178,attendance_monthly_features,AF-02580,EMP-0296,2026-07-01,0.609,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0179,attendance_monthly_features,AF-06605,EMP-0630,2026-06-01,0.605,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0180,attendance_monthly_features,AF-04523,EMP-0479,2026-09-01,0.603,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260930
+AN-0181,attendance_monthly_features,AF-05196,EMP-0535,2026-07-01,0.603,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0182,attendance_monthly_features,AF-06381,EMP-0616,2025-06-01,0.598,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0183,attendance_monthly_features,AF-00468,EMP-0054,2025-12-01,0.597,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0184,attendance_monthly_features,AF-06733,EMP-0641,2025-09-01,0.596,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0185,attendance_monthly_features,AF-04863,EMP-0510,2026-02-01,0.595,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0186,attendance_monthly_features,AF-00760,EMP-0089,2025-05-01,0.595,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0187,attendance_monthly_features,AF-04013,EMP-0433,2026-05-01,0.595,Y,FREQUENT_LATE,14 late arrivals this month,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0188,attendance_monthly_features,AF-01995,EMP-0238,2025-06-01,0.592,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250630
+AN-0189,attendance_monthly_features,AF-07162,EMP-0687,2026-03-01,0.592,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0190,attendance_monthly_features,AF-07060,EMP-0672,2026-01-01,0.591,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0191,attendance_monthly_features,AF-05799,EMP-0578,2025-05-01,0.589,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250531
+AN-0192,attendance_monthly_features,AF-02963,EMP-0332,2026-05-01,0.588,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0193,attendance_monthly_features,AF-03192,EMP-0357,2026-03-01,0.586,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0194,attendance_monthly_features,AF-06905,EMP-0656,2025-11-01,0.585,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0195,attendance_monthly_features,AF-05410,EMP-0550,2026-06-01,0.585,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0196,attendance_monthly_features,AF-05650,EMP-0569,2026-06-01,0.584,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260630
+AN-0197,attendance_monthly_features,AF-04675,EMP-0490,2025-11-01,0.584,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0198,attendance_monthly_features,AF-07130,EMP-0682,2026-02-01,0.584,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0199,attendance_monthly_features,AF-06663,EMP-0635,2026-08-01,0.584,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260831
+AN-0200,attendance_monthly_features,AF-05276,EMP-0542,2025-08-01,0.583,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0201,attendance_monthly_features,AF-06720,EMP-0640,2025-09-01,0.583,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0202,attendance_monthly_features,AF-03835,EMP-0420,2026-01-01,0.582,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260131
+AN-0203,attendance_monthly_features,AF-05091,EMP-0529,2025-08-01,0.581,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250831
+AN-0204,attendance_monthly_features,AF-06986,EMP-0664,2025-12-01,0.581,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0205,attendance_monthly_features,AF-04834,EMP-0508,2025-07-01,0.581,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0206,attendance_monthly_features,AF-00333,EMP-0040,2026-05-01,0.578,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0207,attendance_monthly_features,AF-06904,EMP-0655,2026-07-01,0.578,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0208,attendance_monthly_features,AF-04614,EMP-0485,2025-04-01,0.577,Y,FREQUENT_LATE,19 late arrivals this month,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0209,attendance_monthly_features,AF-00702,EMP-0079,2026-07-01,0.576,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0210,attendance_monthly_features,AF-05100,EMP-0529,2026-05-01,0.576,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0211,attendance_monthly_features,AF-00649,EMP-0074,2025-04-01,0.576,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250430
+AN-0212,attendance_monthly_features,AF-07304,EMP-0720,2026-07-01,0.575,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260731
+AN-0213,attendance_monthly_features,AF-00328,EMP-0040,2025-12-01,0.574,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251231
+AN-0214,attendance_monthly_features,AF-03931,EMP-0428,2025-07-01,0.573,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0215,attendance_monthly_features,AF-06604,EMP-0630,2026-05-01,0.572,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260531
+AN-0216,attendance_monthly_features,AF-06521,EMP-0625,2025-07-01,0.572,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0217,attendance_monthly_features,AF-06566,EMP-0628,2025-07-01,0.571,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250731
+AN-0218,attendance_monthly_features,AF-02135,EMP-0249,2025-11-01,0.571,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20251130
+AN-0219,attendance_monthly_features,AF-02925,EMP-0330,2026-03-01,0.57,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260331
+AN-0220,attendance_monthly_features,AF-00872,EMP-0097,2025-09-01,0.567,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20250930
+AN-0221,attendance_monthly_features,AF-03401,EMP-0377,2026-02-01,0.566,Y,PATTERN_SHIFT,Attendance pattern differs sharply from peers and own history,,iforest-attendance-0.1,2026-10-01 02:00:00,20260228
+AN-0222,payroll_monthly_features,PI-005869,EMP-0503,2026-06-01,1.0,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,347844.46,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0223,payroll_monthly_features,PI-003304,EMP-0304,2025-12-01,0.939,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,2165286.9,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0224,payroll_monthly_features,PI-002595,EMP-0453,2025-10-01,0.936,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,1835162.77,iforest-payroll-0.1,2026-10-01 02:00:00,20251031
+AN-0225,payroll_monthly_features,PI-002124,EMP-0331,2025-09-01,0.923,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,1413294.48,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0226,payroll_monthly_features,PI-003441,EMP-0533,2025-12-01,0.922,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,1329305.58,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0227,payroll_monthly_features,PI-000741,EMP-0578,2025-05-01,0.914,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,33214.43,iforest-payroll-0.1,2026-10-01 02:00:00,20250531
+AN-0228,payroll_monthly_features,PI-003796,EMP-0459,2026-01-01,0.911,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,854779.35,iforest-payroll-0.1,2026-10-01 02:00:00,20260131
+AN-0229,payroll_monthly_features,PI-005556,EMP-0633,2026-05-01,0.91,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,24669.69,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0230,payroll_monthly_features,PI-006595,EMP-0283,2026-08-01,0.902,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,881307.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260831
+AN-0231,payroll_monthly_features,PI-000493,EMP-0209,2025-05-01,0.9,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,215579.33,iforest-payroll-0.1,2026-10-01 02:00:00,20250531
+AN-0232,payroll_monthly_features,PI-007199,EMP-0590,2026-09-01,0.9,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,1071009.31,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0233,payroll_monthly_features,PI-006419,EMP-0669,2026-07-01,0.899,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,1011003.48,iforest-payroll-0.1,2026-10-01 02:00:00,20260731
+AN-0234,payroll_monthly_features,PI-006837,EMP-0666,2026-08-01,0.898,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,762597.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260831
+AN-0235,payroll_monthly_features,PI-000998,EMP-0423,2025-06-01,0.895,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,297820.58,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0236,payroll_monthly_features,PI-006067,EMP-0057,2026-07-01,0.891,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,70376.7,iforest-payroll-0.1,2026-10-01 02:00:00,20260731
+AN-0237,payroll_monthly_features,PI-003094,EMP-0588,2025-11-01,0.891,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,64900.9,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0238,payroll_monthly_features,PI-005825,EMP-0423,2026-06-01,0.891,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,296590.62,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0239,payroll_monthly_features,PI-006858,EMP-0690,2026-08-01,0.891,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,45328.8,iforest-payroll-0.1,2026-10-01 02:00:00,20260831
+AN-0240,payroll_monthly_features,PI-004312,EMP-0613,2026-02-01,0.891,Y,GROSS_ABOVE_NORM,Gross is 9.6x the monthly fixed pay,558793.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260228
+AN-0241,payroll_monthly_features,PI-007098,EMP-0423,2026-09-01,0.89,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,293874.29,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0242,payroll_monthly_features,PI-003373,EMP-0423,2025-12-01,0.889,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,281992.6,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0243,payroll_monthly_features,PI-005443,EMP-0469,2026-05-01,0.888,Y,NEGATIVE_NET_PAY,Deductions exceed gross pay,107200.5,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0244,payroll_monthly_features,PI-004590,EMP-0423,2026-03-01,0.886,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,278912.78,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0245,payroll_monthly_features,PI-003322,EMP-0332,2025-12-01,0.868,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,4797.28,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0246,payroll_monthly_features,PI-003389,EMP-0445,2025-12-01,0.865,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,288930.56,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0247,payroll_monthly_features,PI-005846,EMP-0458,2026-06-01,0.86,Y,GROSS_ABOVE_NORM,Gross is 10.0x the monthly fixed pay,447441.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0248,payroll_monthly_features,PI-004887,EMP-0198,2026-04-01,0.848,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,338543.52,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0249,payroll_monthly_features,PI-007146,EMP-0509,2026-09-01,0.843,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,51832.68,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0250,payroll_monthly_features,PI-002299,EMP-0583,2025-09-01,0.843,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,248111.43,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0251,payroll_monthly_features,PI-005873,EMP-0509,2026-06-01,0.839,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,78958.17,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0252,payroll_monthly_features,PI-000281,EMP-0485,2025-04-01,0.838,Y,OVERTIME_ABOVE_CAP,96 paid overtime hours exceeds the 50-hour cap,47557.75,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0253,payroll_monthly_features,PI-000100,EMP-0198,2025-04-01,0.835,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,252639.92,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0254,payroll_monthly_features,PI-002923,EMP-0332,2025-11-01,0.834,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,5798.28,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0255,payroll_monthly_features,PI-001855,EMP-0526,2025-08-01,0.834,Y,GROSS_ABOVE_NORM,Gross is 4.2x the monthly fixed pay,382040.5,iforest-payroll-0.1,2026-10-01 02:00:00,20250831
+AN-0256,payroll_monthly_features,PI-000904,EMP-0266,2025-06-01,0.834,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,72709.12,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0257,payroll_monthly_features,PI-000025,EMP-0049,2025-04-01,0.833,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,237787.91,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0258,payroll_monthly_features,PI-003284,EMP-0266,2025-12-01,0.832,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,9718.88,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0259,payroll_monthly_features,PI-002086,EMP-0266,2025-09-01,0.83,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,42305.94,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0260,payroll_monthly_features,PI-004643,EMP-0513,2026-03-01,0.826,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,86766.57,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0261,payroll_monthly_features,PI-007300,EMP-0705,2026-09-01,0.824,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,76407.35,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0262,payroll_monthly_features,PI-003429,EMP-0513,2025-12-01,0.824,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,38796.64,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0263,payroll_monthly_features,PI-002240,EMP-0513,2025-09-01,0.822,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,95032.93,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0264,payroll_monthly_features,PI-001064,EMP-0513,2025-06-01,0.82,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,80707.8,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0265,payroll_monthly_features,PI-005670,EMP-0103,2026-06-01,0.82,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,86823.87,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0266,payroll_monthly_features,PI-000053,EMP-0099,2025-04-01,0.818,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,235513.59,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0267,payroll_monthly_features,PI-003529,EMP-0635,2025-12-01,0.813,Y,OVERTIME_ABOVE_CAP,102 paid overtime hours exceeds the 50-hour cap,41464.57,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0268,payroll_monthly_features,PI-004606,EMP-0445,2026-03-01,0.813,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,229677.24,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0269,payroll_monthly_features,PI-005484,EMP-0543,2026-05-01,0.813,Y,GROSS_ABOVE_NORM,Gross is 10.5x the monthly fixed pay,271213.79,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0270,payroll_monthly_features,PI-002209,EMP-0464,2025-09-01,0.812,Y,OVERTIME_ABOVE_CAP,99 paid overtime hours exceeds the 50-hour cap,45054.44,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0271,payroll_monthly_features,PI-006004,EMP-0673,2026-06-01,0.812,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,244066.27,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0272,payroll_monthly_features,PI-005839,EMP-0445,2026-06-01,0.81,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,224734.77,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0273,payroll_monthly_features,PI-005937,EMP-0600,2026-06-01,0.809,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,99962.58,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0274,payroll_monthly_features,PI-004714,EMP-0605,2026-03-01,0.808,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,226848.01,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0275,payroll_monthly_features,PI-004758,EMP-0652,2026-03-01,0.803,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,94573.56,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0276,payroll_monthly_features,PI-000154,EMP-0302,2025-04-01,0.801,Y,OVERTIME_ABOVE_CAP,81 paid overtime hours exceeds the 50-hour cap,54542.77,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0277,payroll_monthly_features,PI-002324,EMP-0610,2025-09-01,0.801,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,220154.83,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0278,payroll_monthly_features,PI-004818,EMP-0049,2026-04-01,0.793,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,224175.83,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0279,payroll_monthly_features,PI-000135,EMP-0266,2025-04-01,0.791,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,4069.9,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0280,payroll_monthly_features,PI-001090,EMP-0542,2025-06-01,0.791,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,85798.52,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0281,payroll_monthly_features,PI-004682,EMP-0570,2026-03-01,0.789,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,103560.47,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0282,payroll_monthly_features,PI-004695,EMP-0583,2026-03-01,0.788,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,216533.65,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0283,payroll_monthly_features,PI-003723,EMP-0332,2026-01-01,0.787,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,8601.1,iforest-payroll-0.1,2026-10-01 02:00:00,20260131
+AN-0284,payroll_monthly_features,PI-000943,EMP-0332,2025-06-01,0.787,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,9001.51,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0285,payroll_monthly_features,PI-001333,EMP-0332,2025-07-01,0.787,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,12146.61,iforest-payroll-0.1,2026-10-01 02:00:00,20250731
+AN-0286,payroll_monthly_features,PI-002125,EMP-0332,2025-09-01,0.787,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,12191.38,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0287,payroll_monthly_features,PI-001727,EMP-0332,2025-08-01,0.787,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,9602.11,iforest-payroll-0.1,2026-10-01 02:00:00,20250831
+AN-0288,payroll_monthly_features,PI-004847,EMP-0107,2026-04-01,0.784,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,211997.58,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0289,payroll_monthly_features,PI-005760,EMP-0304,2026-06-01,0.782,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,209243.52,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0290,payroll_monthly_features,PI-005052,EMP-0509,2026-04-01,0.778,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,22.35,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0291,payroll_monthly_features,PI-001115,EMP-0570,2025-06-01,0.775,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,72142.77,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0292,payroll_monthly_features,PI-002286,EMP-0570,2025-09-01,0.775,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,47444.47,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0293,payroll_monthly_features,PI-005583,EMP-0660,2026-05-01,0.775,Y,GROSS_ABOVE_NORM,Gross is 10.4x the monthly fixed pay,226613.21,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0294,payroll_monthly_features,PI-002521,EMP-0332,2025-10-01,0.775,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,7146.61,iforest-payroll-0.1,2026-10-01 02:00:00,20251031
+AN-0295,payroll_monthly_features,PI-004844,EMP-0099,2026-04-01,0.773,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,143069.94,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0296,payroll_monthly_features,PI-001866,EMP-0540,2025-08-01,0.771,Y,ZERO_PAY,Active employee shows zero pay,37745.0,iforest-payroll-0.1,2026-10-01 02:00:00,20250831
+AN-0297,payroll_monthly_features,PI-004734,EMP-0627,2026-03-01,0.771,Y,ZERO_PAY,Active employee shows zero pay,56540.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0298,payroll_monthly_features,PI-004865,EMP-0142,2026-04-01,0.771,Y,ZERO_PAY,Active employee shows zero pay,117647.54,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0299,payroll_monthly_features,PI-005048,EMP-0503,2026-04-01,0.771,Y,ZERO_PAY,Active employee shows zero pay,173600.21,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0300,payroll_monthly_features,PI-005640,EMP-0047,2026-06-01,0.771,Y,ZERO_PAY,Active employee shows zero pay,45730.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0301,payroll_monthly_features,PI-001024,EMP-0457,2025-06-01,0.77,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,214041.56,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0302,payroll_monthly_features,PI-000560,EMP-0332,2025-05-01,0.763,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,12404.94,iforest-payroll-0.1,2026-10-01 02:00:00,20250531
+AN-0303,payroll_monthly_features,PI-003280,EMP-0256,2025-12-01,0.761,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14857.01,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0304,payroll_monthly_features,PI-002159,EMP-0398,2025-09-01,0.76,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,221528.05,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0305,payroll_monthly_features,PI-002777,EMP-0041,2025-11-01,0.76,Y,OVERTIME_ABOVE_CAP,78 paid overtime hours exceeds the 50-hour cap,21287.92,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0306,payroll_monthly_features,PI-004504,EMP-0266,2026-03-01,0.756,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,5470.88,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0307,payroll_monthly_features,PI-005808,EMP-0398,2026-06-01,0.755,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,215787.02,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0308,payroll_monthly_features,PI-000056,EMP-0107,2025-04-01,0.755,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,160426.51,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0309,payroll_monthly_features,PI-002881,EMP-0256,2025-11-01,0.754,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14143.2,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0310,payroll_monthly_features,PI-004087,EMP-0256,2026-02-01,0.754,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14143.2,iforest-payroll-0.1,2026-10-01 02:00:00,20260228
+AN-0311,payroll_monthly_features,PI-004500,EMP-0256,2026-03-01,0.754,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14143.2,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0312,payroll_monthly_features,PI-003681,EMP-0256,2026-01-01,0.754,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14143.2,iforest-payroll-0.1,2026-10-01 02:00:00,20260131
+AN-0313,payroll_monthly_features,PI-004429,EMP-0098,2026-03-01,0.751,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,25690.47,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0314,payroll_monthly_features,PI-000823,EMP-0098,2025-06-01,0.747,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,10194.92,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0315,payroll_monthly_features,PI-002008,EMP-0098,2025-09-01,0.747,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,16757.74,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0316,payroll_monthly_features,PI-005205,EMP-0691,2026-04-01,0.745,Y,OVERTIME_ABOVE_CAP,78 paid overtime hours exceeds the 50-hour cap,17974.55,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0317,payroll_monthly_features,PI-000017,EMP-0035,2025-04-01,0.743,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,158208.56,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0318,payroll_monthly_features,PI-005984,EMP-0652,2026-06-01,0.742,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,80720.89,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0319,payroll_monthly_features,PI-000925,EMP-0304,2025-06-01,0.735,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,179875.03,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0320,payroll_monthly_features,PI-003207,EMP-0098,2025-12-01,0.733,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,5265.45,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0321,payroll_monthly_features,PI-005035,EMP-0479,2026-04-01,0.727,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,181926.15,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0322,payroll_monthly_features,PI-002761,EMP-0011,2025-11-01,0.726,Y,GROSS_ABOVE_NORM,Gross is 10.1x the monthly fixed pay,208526.57,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0323,payroll_monthly_features,PI-002479,EMP-0256,2025-10-01,0.725,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,9143.2,iforest-payroll-0.1,2026-10-01 02:00:00,20251031
+AN-0324,payroll_monthly_features,PI-005085,EMP-0560,2026-04-01,0.725,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,22300.38,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0325,payroll_monthly_features,PI-003470,EMP-0570,2025-12-01,0.724,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,3077.56,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0326,payroll_monthly_features,PI-007118,EMP-0457,2026-09-01,0.723,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,180824.92,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0327,payroll_monthly_features,PI-005940,EMP-0605,2026-06-01,0.722,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,182293.45,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0328,payroll_monthly_features,PI-000878,EMP-0212,2025-06-01,0.718,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,180048.4,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0329,payroll_monthly_features,PI-004053,EMP-0183,2026-02-01,0.717,Y,PF_NOT_DEDUCTED,Provident fund missing for a PF-applicable employee,30119.64,iforest-payroll-0.1,2026-10-01 02:00:00,20260228
+AN-0330,payroll_monthly_features,PI-006906,EMP-0026,2026-09-01,0.716,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,183564.04,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0331,payroll_monthly_features,PI-000783,EMP-0026,2025-06-01,0.714,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,169476.87,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0332,payroll_monthly_features,PI-007210,EMP-0605,2026-09-01,0.714,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,177711.94,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0333,payroll_monthly_features,PI-006994,EMP-0212,2026-09-01,0.711,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,183876.18,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0334,payroll_monthly_features,PI-006886,EMP-0718,2026-08-01,0.71,Y,OVERTIME_ABOVE_CAP,57 paid overtime hours exceeds the 50-hour cap,32951.5,iforest-payroll-0.1,2026-10-01 02:00:00,20260831
+AN-0335,payroll_monthly_features,PI-004885,EMP-0190,2026-04-01,0.708,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,20589.4,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0336,payroll_monthly_features,PI-003502,EMP-0605,2025-12-01,0.707,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,165548.25,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0337,payroll_monthly_features,PI-003241,EMP-0169,2025-12-01,0.707,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,167760.53,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0338,payroll_monthly_features,PI-007271,EMP-0673,2026-09-01,0.705,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,179579.35,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0339,payroll_monthly_features,PI-006089,EMP-0099,2026-07-01,0.705,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14660.62,iforest-payroll-0.1,2026-10-01 02:00:00,20260731
+AN-0340,payroll_monthly_features,PI-005629,EMP-0026,2026-06-01,0.705,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,178785.97,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0341,payroll_monthly_features,PI-006516,EMP-0099,2026-08-01,0.704,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,22813.05,iforest-payroll-0.1,2026-10-01 02:00:00,20260831
+AN-0342,payroll_monthly_features,PI-005668,EMP-0099,2026-06-01,0.704,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,22541.31,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0343,payroll_monthly_features,PI-005256,EMP-0099,2026-05-01,0.704,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,30965.51,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0344,payroll_monthly_features,PI-006945,EMP-0099,2026-09-01,0.704,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,30965.51,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0345,payroll_monthly_features,PI-005022,EMP-0453,2026-04-01,0.703,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,213647.87,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0346,payroll_monthly_features,PI-002135,EMP-0349,2025-09-01,0.698,Y,OVERTIME_ABOVE_CAP,57 paid overtime hours exceeds the 50-hour cap,11934.01,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0347,payroll_monthly_features,PI-005923,EMP-0583,2026-06-01,0.697,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,163248.97,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0348,payroll_monthly_features,PI-004950,EMP-0325,2026-04-01,0.695,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,187929.93,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0349,payroll_monthly_features,PI-003417,EMP-0494,2025-12-01,0.691,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,1966.15,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0350,payroll_monthly_features,PI-001128,EMP-0583,2025-06-01,0.684,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,153566.05,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0351,payroll_monthly_features,PI-002195,EMP-0445,2025-09-01,0.684,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,147705.48,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0352,payroll_monthly_features,PI-000087,EMP-0161,2025-04-01,0.682,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,126660.07,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0353,payroll_monthly_features,PI-005865,EMP-0494,2026-06-01,0.68,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,2400.42,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0354,payroll_monthly_features,PI-004850,EMP-0112,2026-04-01,0.675,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,155043.5,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0355,payroll_monthly_features,PI-007269,EMP-0670,2026-09-01,0.674,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,172802.42,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0356,payroll_monthly_features,PI-004573,EMP-0398,2026-03-01,0.673,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,152463.82,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0357,payroll_monthly_features,PI-002406,EMP-0099,2025-10-01,0.673,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,6880.0,iforest-payroll-0.1,2026-10-01 02:00:00,20251031
+AN-0358,payroll_monthly_features,PI-002114,EMP-0314,2025-09-01,0.67,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,160661.09,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0359,payroll_monthly_features,PI-004820,EMP-0055,2026-04-01,0.669,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,179146.96,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0360,payroll_monthly_features,PI-004796,EMP-0006,2026-04-01,0.669,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,87110.99,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0361,payroll_monthly_features,PI-000701,EMP-0535,2025-05-01,0.667,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,14443.05,iforest-payroll-0.1,2026-10-01 02:00:00,20250531
+AN-0362,payroll_monthly_features,PI-003610,EMP-0099,2026-01-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260131
+AN-0363,payroll_monthly_features,PI-003208,EMP-0099,2025-12-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0364,payroll_monthly_features,PI-002809,EMP-0099,2025-11-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20251130
+AN-0365,payroll_monthly_features,PI-000439,EMP-0099,2025-05-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20250531
+AN-0366,payroll_monthly_features,PI-000824,EMP-0099,2025-06-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0367,payroll_monthly_features,PI-001610,EMP-0099,2025-08-01,0.664,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,0.0,iforest-payroll-0.1,2026-10-01 02:00:00,20250831
+AN-0368,payroll_monthly_features,PI-004923,EMP-0276,2026-04-01,0.661,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,171659.84,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0369,payroll_monthly_features,PI-004992,EMP-0405,2026-04-01,0.66,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,156055.26,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0370,payroll_monthly_features,PI-002145,EMP-0371,2025-09-01,0.66,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,144325.38,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0371,payroll_monthly_features,PI-004016,EMP-0099,2026-02-01,0.659,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,16945.93,iforest-payroll-0.1,2026-10-01 02:00:00,20260228
+AN-0372,payroll_monthly_features,PI-002009,EMP-0099,2025-09-01,0.659,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,15816.2,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0373,payroll_monthly_features,PI-001216,EMP-0099,2025-07-01,0.657,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,7653.0,iforest-payroll-0.1,2026-10-01 02:00:00,20250731
+AN-0374,payroll_monthly_features,PI-004430,EMP-0099,2026-03-01,0.657,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,7653.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0375,payroll_monthly_features,PI-005876,EMP-0513,2026-06-01,0.657,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,163572.66,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0376,payroll_monthly_features,PI-003167,EMP-0026,2025-12-01,0.654,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,144409.14,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0377,payroll_monthly_features,PI-000978,EMP-0398,2025-06-01,0.65,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,145037.19,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0378,payroll_monthly_features,PI-005225,EMP-0041,2026-05-01,0.65,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,13143.71,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0379,payroll_monthly_features,PI-004863,EMP-0138,2026-04-01,0.649,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,59095.0,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0380,payroll_monthly_features,PI-007129,EMP-0479,2026-09-01,0.646,Y,GROSS_BELOW_EXPECTED,Gross is well below fixed pay with no leave without pay,284135.07,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0381,payroll_monthly_features,PI-000964,EMP-0371,2025-06-01,0.645,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,130636.89,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0382,payroll_monthly_features,PI-000037,EMP-0072,2025-04-01,0.645,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,126680.52,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0383,payroll_monthly_features,PI-000785,EMP-0030,2025-06-01,0.645,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,130651.46,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0384,payroll_monthly_features,PI-004449,EMP-0138,2026-03-01,0.645,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,2621.11,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0385,payroll_monthly_features,PI-001057,EMP-0506,2025-06-01,0.645,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,152031.61,iforest-payroll-0.1,2026-10-01 02:00:00,20250630
+AN-0386,payroll_monthly_features,PI-001957,EMP-0638,2025-08-01,0.644,Y,GROSS_BELOW_EXPECTED,Gross is well below fixed pay with no leave without pay,210754.43,iforest-payroll-0.1,2026-10-01 02:00:00,20250831
+AN-0387,payroll_monthly_features,PI-004672,EMP-0555,2026-03-01,0.643,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,8353.67,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0388,payroll_monthly_features,PI-005587,EMP-0664,2026-05-01,0.643,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,10282.31,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0389,payroll_monthly_features,PI-004914,EMP-0256,2026-04-01,0.642,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,119.2,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0390,payroll_monthly_features,PI-004390,EMP-0026,2026-03-01,0.641,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,140091.25,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0391,payroll_monthly_features,PI-003499,EMP-0600,2025-12-01,0.64,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,124153.36,iforest-payroll-0.1,2026-10-01 02:00:00,20251231
+AN-0392,payroll_monthly_features,PI-001968,EMP-0026,2025-09-01,0.637,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,136493.01,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0393,payroll_monthly_features,PI-004910,EMP-0249,2026-04-01,0.635,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,144946.59,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0394,payroll_monthly_features,PI-005618,EMP-0697,2026-05-01,0.635,Y,GROSS_BELOW_EXPECTED,Gross is well below fixed pay with no leave without pay,234028.29,iforest-payroll-0.1,2026-10-01 02:00:00,20260531
+AN-0395,payroll_monthly_features,PI-004826,EMP-0065,2026-04-01,0.634,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,94838.66,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0396,payroll_monthly_features,PI-002757,EMP-0650,2025-10-01,0.632,Y,GROSS_BELOW_EXPECTED,Gross is well below fixed pay with no leave without pay,198146.04,iforest-payroll-0.1,2026-10-01 02:00:00,20251031
+AN-0397,payroll_monthly_features,PI-005845,EMP-0457,2026-06-01,0.631,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,143379.65,iforest-payroll-0.1,2026-10-01 02:00:00,20260630
+AN-0398,payroll_monthly_features,PI-000060,EMP-0112,2025-04-01,0.63,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,123602.47,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0399,payroll_monthly_features,PI-004528,EMP-0309,2026-03-01,0.63,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,135272.81,iforest-payroll-0.1,2026-10-01 02:00:00,20260331
+AN-0400,payroll_monthly_features,PI-007215,EMP-0610,2026-09-01,0.63,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,141109.43,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0401,payroll_monthly_features,PI-002062,EMP-0212,2025-09-01,0.629,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,148275.35,iforest-payroll-0.1,2026-10-01 02:00:00,20250930
+AN-0402,payroll_monthly_features,PI-007112,EMP-0445,2026-09-01,0.629,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,132259.27,iforest-payroll-0.1,2026-10-01 02:00:00,20260930
+AN-0403,payroll_monthly_features,PI-000169,EMP-0324,2025-04-01,0.628,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,17987.7,iforest-payroll-0.1,2026-10-01 02:00:00,20250430
+AN-0404,payroll_monthly_features,PI-004810,EMP-0035,2026-04-01,0.627,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,95100.1,iforest-payroll-0.1,2026-10-01 02:00:00,20260430
+AN-0405,payroll_monthly_features,PI-007068,EMP-0371,2026-09-01,0.626,Y,STATISTICAL_OUTLIER,Unusual combination of pay ratios versus all other payslips,138213.78,iforest-payroll-0.1,2026-10-01 02:00:00,20260930

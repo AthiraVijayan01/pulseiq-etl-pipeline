@@ -1,0 +1,43 @@
+feed,column_name,data_type,nullable,rule_or_allowed_values,description
+AI anomaly results (fact_anomaly),result_id,string,no,"unique, format AN-nnnn",Row id
+AI anomaly results (fact_anomaly),source_dataset,string,no,attendance_monthly_features | payroll_monthly_features,Which dataset was scored
+AI anomaly results (fact_anomaly),record_id,string,no,exists in source dataset,Scored record id
+AI anomaly results (fact_anomaly),employee_id,string,no,exists in dim_employee,Employee
+AI anomaly results (fact_anomaly),period,date,no,month end or start date,Period of the record
+AI anomaly results (fact_anomaly),anomaly_score,"decimal(4,3)",no,"0 to 1, higher is more unusual",Normalised score
+AI anomaly results (fact_anomaly),flagged,char(1),no,Y or N,Whether the threshold was crossed
+AI anomaly results (fact_anomaly),reason_code,string,no,one of the published codes,Machine reason
+AI anomaly results (fact_anomaly),reason_text,string,no,plain English,Reason for business users
+AI anomaly results (fact_anomaly),money_at_risk,"decimal(14,2)",yes,blank for attendance rows,Estimated money exposure for payroll rows
+AI anomaly results (fact_anomaly),model_version,string,no,semantic version text,Model that produced it
+AI anomaly results (fact_anomaly),scored_at,timestamp,no,UTC,When scored
+AI attrition risk (fact_attrition_risk),prediction_id,string,no,unique AR-nnnn,Row id
+AI attrition risk (fact_attrition_risk),employee_id,string,no,exists in dim_employee and active,Employee
+AI attrition risk (fact_attrition_risk),department_id,string,no,exists in dim_department,Department at as-of date
+AI attrition risk (fact_attrition_risk),as_of_date,date,no,same for the whole batch,Prediction date
+AI attrition risk (fact_attrition_risk),risk_score_12m,"decimal(4,3)",no,0 to 1,Probability of leaving within 12 months
+AI attrition risk (fact_attrition_risk),risk_band,string,no,Low | Medium | High,"Band: High = top 10%, Medium = next 20%"
+AI attrition risk (fact_attrition_risk),top_reason_1..3,string,yes,plain English,Main drivers
+AI attrition risk (fact_attrition_risk),model_version,string,no,text,Model
+AI forecast (fact_forecast),forecast_id,string,no,unique FC-nnnn,Row id
+AI forecast (fact_forecast),metric,string,no,headcount_end | attrition_rate_monthly_pct,Forecast metric
+AI forecast (fact_forecast),department_id,string,no,dept id or ALL,Scope
+AI forecast (fact_forecast),forecast_month,date,no,first day of month,Forecast month
+AI forecast (fact_forecast),forecast_value,decimal,no,>= 0,Point forecast
+AI forecast (fact_forecast),lower_80,decimal,no,<= forecast_value,80% lower bound
+AI forecast (fact_forecast),upper_80,decimal,no,>= forecast_value,80% upper bound
+AI forecast (fact_forecast),method,string,no,text,Method
+AI forecast (fact_forecast),trained_through,string,no,YYYY-MM,Last actual month used
+Task board (fact_task),task_id,string,no,unique TASK-nnnnn,Row id
+Task board (fact_task),team_id,string,no,exists in dim_team,Team
+Task board (fact_task),sprint_id,string,no,exists in dim_sprint,Sprint
+Task board (fact_task),assignee_employee_id,string,no,exists in dim_employee,Assignee
+Task board (fact_task),task_type,string,no,Feature | Bug | Chore | Spike,Type
+Task board (fact_task),priority,string,no,P1..P4,Priority
+Task board (fact_task),story_points,int,no,"1,2,3,5,8,13",Effort
+Task board (fact_task),created_date,date,no,<= started_date,Created
+Task board (fact_task),started_date,date,yes,blank only when To Do,Started
+Task board (fact_task),due_date,date,no,sprint end date,Due
+Task board (fact_task),completed_date,date,yes,required when status = Done; >= started_date,Completed
+Task board (fact_task),status,string,no,Done | In Progress | Blocked | To Do | Cancelled,Status
+Task board (fact_task),reopened_count,int,no,>= 0,Times reopened

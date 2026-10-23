@@ -1,0 +1,29 @@
+client_id,client_name,industry,city,state_or_region,country,client_type,gst_registration,payment_terms_days,payment_behaviour,primary_service_line,contact_email,onboarded_on,is_active
+CL-001,Meridian Retail Pvt Ltd,Retail,Chennai,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0001,30,normal,4001,accounts@meridian-demo.example,2020-02-06,Y
+CL-002,BlueRiver Logistics Ltd,Logistics,Mumbai,Maharashtra,IN,DOMESTIC,DEMO-GSTIN-0002,45,normal,4001,accounts@blueriver-demo.example,2021-03-07,Y
+CL-003,Sunrise Healthcare Systems,Healthcare,Bengaluru,Karnataka,IN,DOMESTIC,DEMO-GSTIN-0003,30,prompt,4002,accounts@sunrise-demo.example,2022-04-08,Y
+CL-004,Kaveri Textiles Pvt Ltd,Manufacturing,Erode,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0004,60,slow,4001,accounts@kaveri-demo.example,2023-05-09,Y
+CL-005,Orchid Financial Services,BFSI,Mumbai,Maharashtra,IN,DOMESTIC,DEMO-GSTIN-0005,30,prompt,4003,accounts@orchid-demo.example,2024-06-10,Y
+CL-006,NorthStar Telecom Ltd,Telecom,Gurugram,Haryana,IN,DOMESTIC,DEMO-GSTIN-0006,45,normal,4002,accounts@northstar-demo.example,2019-07-11,Y
+CL-007,Vaigai Foods & Beverages,FMCG,Madurai,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0007,45,slow,4001,accounts@vaigai-demo.example,2020-08-12,Y
+CL-008,Coromandel Auto Components,Automotive,Chennai,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0008,45,normal,4004,accounts@coromandel-demo.example,2021-09-13,Y
+CL-009,Lotus Insurance Brokers,BFSI,Pune,Maharashtra,IN,DOMESTIC,DEMO-GSTIN-0009,30,prompt,4002,accounts@lotus-demo.example,2022-10-14,Y
+CL-010,PeakEdge Education Pvt Ltd,Education,Hyderabad,Telangana,IN,DOMESTIC,DEMO-GSTIN-0010,30,normal,4002,accounts@peakedge-demo.example,2023-11-15,Y
+CL-011,Zephyr Hospitality Group,Hospitality,Kochi,Kerala,IN,DOMESTIC,DEMO-GSTIN-0011,60,slow,4001,accounts@zephyr-demo.example,2024-12-16,Y
+CL-012,Indus Power Utilities,Energy,New Delhi,Delhi,IN,DOMESTIC,DEMO-GSTIN-0012,60,normal,4003,accounts@indus-demo.example,2019-01-17,Y
+CL-013,Aurora Pharma Ltd,Pharma,Hyderabad,Telangana,IN,DOMESTIC,DEMO-GSTIN-0013,30,prompt,4001,accounts@aurora-demo.example,2020-02-18,Y
+CL-014,Siruvani Agro Tech,Agriculture,Coimbatore,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0014,45,risky,4004,accounts@siruvani-demo.example,2021-03-19,Y
+CL-015,Marina Media Works,Media,Chennai,Tamil Nadu,IN,DOMESTIC,DEMO-GSTIN-0015,30,normal,4002,accounts@marina-demo.example,2022-04-20,Y
+CL-016,Triveni Steel Industries,Manufacturing,Jamshedpur,Jharkhand,IN,DOMESTIC,DEMO-GSTIN-0016,60,risky,4003,accounts@triveni-demo.example,2023-05-21,Y
+CL-017,Greenfield Realty Ltd,Real Estate,Bengaluru,Karnataka,IN,DOMESTIC,DEMO-GSTIN-0017,45,normal,4001,accounts@greenfield-demo.example,2024-06-22,Y
+CL-018,Atlas Commerce Inc,E-commerce,Austin,Texas,US,EXPORT,,30,prompt,4001,accounts@atlas-demo.example,2019-07-23,Y
+CL-019,Nordic Freight AB,Logistics,Gothenburg,Vastra Gotaland,SE,EXPORT,,30,normal,4001,accounts@nordic-demo.example,2020-08-24,Y
+CL-020,Harbourline Bank plc,BFSI,London,England,GB,EXPORT,,45,normal,4003,accounts@harbourline-demo.example,2021-09-05,Y
+CL-021,Tasman Retail Pty Ltd,Retail,Sydney,NSW,AU,EXPORT,,30,prompt,4002,accounts@tasman-demo.example,2022-10-06,Y
+CL-022,Rheinwerk Systems GmbH,Industrial,Stuttgart,Baden-Wurttemberg,DE,EXPORT,,45,normal,4001,accounts@rheinwerk-demo.example,2023-11-07,Y
+CL-023,Maple Health Partners,Healthcare,Toronto,Ontario,CA,EXPORT,,30,prompt,4002,accounts@maple-demo.example,2024-12-08,Y
+CL-024,Lion City Fintech Pte Ltd,Fintech,Singapore,Singapore,SG,EXPORT,,30,prompt,4001,accounts@lion-demo.example,2019-01-09,Y
+CL-025,Gulf Mercantile LLC,Trading,Dubai,Dubai,AE,EXPORT,,60,slow,4004,accounts@gulf-demo.example,2020-02-10,Y
+CL-026,Alpine Insure AG,Insurance,Zurich,Zurich,CH,EXPORT,,45,normal,4003,accounts@alpine-demo.example,2021-03-11,Y
+CL-027,Sakura Mobility KK,Automotive,Nagoya,Aichi,JP,EXPORT,,45,normal,4001,accounts@sakura-demo.example,2022-04-12,Y
+CL-028,Pacifica Energy Corp,Energy,Houston,Texas,US,EXPORT,,45,normal,4003,accounts@pacifica-demo.example,2023-05-13,Y

@@ -1,0 +1,48 @@
+account_code,account_name,account_type,normal_balance,parent_code,is_group,statement,is_active
+1000,Assets,ASSET,DEBIT,,Y,Balance Sheet,Y
+1001,Bank - Operating Account,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1002,Petty Cash,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1100,Accounts Receivable,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1200,GST Input Credit,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1300,Employee Advances & Loans,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1400,Prepaid Expenses,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1500,Fixed Assets - Gross Block,ASSET,DEBIT,1000.0,N,Balance Sheet,Y
+1590,Accumulated Depreciation,ASSET,CREDIT,1000.0,N,Balance Sheet,Y
+2000,Liabilities,LIABILITY,CREDIT,,Y,Balance Sheet,Y
+2001,Accounts Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2100,Salaries Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2110,PF Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2120,ESI Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2130,TDS on Salary Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2140,Professional Tax Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2200,GST Output Payable,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+2300,Accrued Expenses,LIABILITY,CREDIT,2000.0,N,Balance Sheet,Y
+3000,Equity,EQUITY,CREDIT,,Y,Balance Sheet,Y
+3001,Share Capital,EQUITY,CREDIT,3000.0,N,Balance Sheet,Y
+3100,Retained Earnings,EQUITY,CREDIT,3000.0,N,Balance Sheet,Y
+4000,Income,INCOME,CREDIT,,Y,Profit & Loss,Y
+4001,Software Services Revenue,INCOME,CREDIT,4000.0,N,Profit & Loss,Y
+4002,Subscription (SaaS) Revenue,INCOME,CREDIT,4000.0,N,Profit & Loss,Y
+4003,Consulting Revenue,INCOME,CREDIT,4000.0,N,Profit & Loss,Y
+4004,Support & Maintenance Revenue,INCOME,CREDIT,4000.0,N,Profit & Loss,Y
+4900,Other Income (Interest),INCOME,CREDIT,4000.0,N,Profit & Loss,Y
+5000,Expenses,EXPENSE,DEBIT,,Y,Profit & Loss,Y
+5001,Salaries & Wages,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5002,Overtime Expense,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5003,Incentives & Bonus,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5004,Employer PF Contribution,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5005,Employer ESI Contribution,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5101,Office Rent,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5102,Utilities,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5103,Internet & Telecom,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5104,Cloud Hosting,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5105,Software Subscriptions,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5106,Travel & Conveyance,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5107,Marketing & Advertising,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5108,Professional Fees,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5109,Recruitment Costs,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5110,Training & Development,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5111,Insurance,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5112,Office Supplies,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5201,Depreciation,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y
+5301,Bank Charges,EXPENSE,DEBIT,5000.0,N,Profit & Loss,Y

@@ -1,14 +1,18 @@
 
+
 """PostgreSQL connection helpers for PulseIQ."""
 
 import os
 from contextlib import contextmanager
+from pathlib import Path
 
 import psycopg
 from dotenv import load_dotenv
 
-# Load local settings from the project's .env file.
-load_dotenv()
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+ENV_FILE = PROJECT_DIR / ".env"
+
+load_dotenv(dotenv_path=ENV_FILE, override=False)
 
 
 def get_connection():
@@ -28,7 +32,7 @@ def get_connection():
 
     if missing:
         raise RuntimeError(
-            "Missing PostgreSQL settings in .env: "
+            f"Missing PostgreSQL settings in {ENV_FILE}: "
             + ", ".join(missing)
         )
 

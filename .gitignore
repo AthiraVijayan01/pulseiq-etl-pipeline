@@ -20,3 +20,6 @@ logs/
 
 clean/
 rejected/
+
+test_official_dq_negative.py
+test_official_dq_negative.py.before_*

@@ -1,0 +1,17 @@
+team_id,team_name,total_tasks,completed_tasks,cancelled_tasks,completion_rate_pct,completed_story_points,on_time_known_tasks,on_time_rate_pct,valid_cycle_time_tasks,median_cycle_time_days,blocked_tasks,reopened_tasks
+T01,Platform Core,2454,2151,79,90.57,7538,2149,93.62,2149,4.0,60,92
+T02,Payments & Billing,2507,2053,79,84.56,6918,2053,92.69,2052,4.0,88,99
+T03,Mobile Apps,2102,1743,66,85.61,5949,1743,93.06,1742,4.0,73,72
+T04,QA Automation,1951,1821,63,96.45,6339,1821,94.01,1821,4.0,14,62
+T05,DevOps & Reliability,2184,1813,75,85.96,6050,1813,91.62,1813,4.0,84,86
+T06,Product Squad,1164,1033,32,91.25,3587,1033,92.93,1033,4.0,27,47
+T07,Design Systems,768,656,31,89.01,2257,656,93.6,656,4.0,22,26
+T08,Data Platform,1061,889,36,86.73,2873,887,94.81,886,4.0,40,44
+T09,ML Services,1478,1299,47,90.78,4342,1299,92.3,1298,4.0,42,64
+T10,Analytics & BI,1135,983,42,89.94,3371,983,93.69,982,4.0,33,44
+T11,Growth Marketing,863,691,17,81.68,2457,690,91.3,690,4.0,35,32
+T12,Support Tooling,3779,2994,107,81.54,10288,2993,92.35,2991,4.0,177,121
+T13,HR Systems,1146,965,41,87.33,3327,965,93.06,964,4.0,31,48
+T14,Finance Automation,1143,994,28,89.15,3482,993,92.55,991,4.0,31,52
+T15,Internal IT,2046,1592,61,80.2,5466,1592,92.46,1590,4.0,111,61
+T16,Sales Enablement,3087,2462,94,82.26,8424,2461,92.69,2461,4.0,131,129

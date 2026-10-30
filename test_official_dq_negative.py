@@ -90,7 +90,7 @@ FIXTURES = {
     "DQ-C11": [
         ("etl_run_log",
          """INSERT INTO pg_temp.etl_run_log
-            (run_id, log_file, started_at, finished_at, status)
+            (run_id, log_file, started_at, finished_at, status, imported_at)
             VALUES (1, 'negative-test',
                     %s, %s, 'SUCCESS')"""),
         ("fact_attrition_risk",
@@ -154,6 +154,30 @@ def main():
                     )
                 )
 
+                # DQ-C11 needs a healthy baseline before testing stale predictions.
+                if check_id == "DQ-C11":
+                    now = datetime.now(timezone.utc)
+                    local_today = now.astimezone(
+                        timezone(timedelta(hours=5, minutes=30))
+                    ).date()
+
+                    cur.execute(
+                        """
+                        INSERT INTO pg_temp.etl_run_log
+                            (run_id, log_file, started_at, finished_at, status, imported_at)
+                        VALUES (1, 'negative-test-baseline', %s, %s, 'SUCCESS', %s)
+                        """,
+                        (now, now, now),
+                    )
+                    cur.execute(
+                        """
+                        INSERT INTO pg_temp.fact_attrition_risk
+                            (prediction_id, as_of_date)
+                        VALUES ('TEST-RISK11', %s)
+                        """,
+                        (local_today.isoformat(),),
+                    )
+
                 cur.execute(test_query)
                 baseline_count = len(cur.fetchall())
 
@@ -165,18 +189,20 @@ def main():
                     )
                     continue
 
-                params = []
-                for table, statement in FIXTURES[check_id]:
-                    if check_id == "DQ-C11" and table == "etl_run_log":
-                        now = datetime.now(timezone.utc)
-                        cur.execute(statement, (now, now))
-                    elif check_id == "DQ-C11" and table == "fact_attrition_risk":
-                        stale_date = (
-                            datetime.now(timezone.utc).date()
-                            - timedelta(days=30)
-                        )
-                        cur.execute(statement, (stale_date.isoformat(),))
-                    else:
+                if check_id == "DQ-C11":
+                    stale_date = (
+                        local_today - timedelta(days=30)
+                    ).isoformat()
+                    cur.execute(
+                        """
+                        UPDATE pg_temp.fact_attrition_risk
+                        SET as_of_date = %s
+                        WHERE prediction_id = 'TEST-RISK11'
+                        """,
+                        (stale_date,),
+                    )
+                else:
+                    for table, statement in FIXTURES[check_id]:
                         cur.execute(statement)
 
                 cur.execute(test_query)

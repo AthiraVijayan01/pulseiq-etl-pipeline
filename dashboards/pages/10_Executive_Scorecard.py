@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import sys
 
@@ -16,6 +15,7 @@ st.set_page_config(
     page_icon="📊",
     layout="wide",
 )
+
 
 st.markdown(
     """
@@ -39,7 +39,8 @@ st.markdown(
             max-width: 100% !important;
         }
 
-        [data-testid="stMetric"] {
+        [data-testid="stMetric"],
+        .kpi-card {
             break-inside: avoid;
         }
     }
@@ -117,6 +118,7 @@ def fetch_dataframe(query):
 
 @st.cache_data(ttl=300)
 def load_scorecard_data():
+
     headcount = fetch_dataframe(
         """
         SELECT
@@ -179,7 +181,8 @@ def load_scorecard_data():
     targets = pd.read_csv(ROOT / "clean" / "kpi_targets.csv")
 
     targets["month"] = pd.to_datetime(
-        targets["month"], errors="coerce"
+        targets["month"],
+        errors="coerce",
     )
 
     targets["year_month"] = targets["month"].dt.strftime("%Y-%m")
@@ -189,17 +192,20 @@ def load_scorecard_data():
         "attrition_monthly_target_pct",
     ]:
         targets[column] = pd.to_numeric(
-            targets[column], errors="coerce"
+            targets[column],
+            errors="coerce",
         )
 
     target_monthly = (
         targets.groupby("year_month", as_index=False)
         .agg(
             attendance_target=(
-                "attendance_rate_target", "mean"
+                "attendance_rate_target",
+                "mean",
             ),
             attrition_target=(
-                "attrition_monthly_target_pct", "mean"
+                "attrition_monthly_target_pct",
+                "mean",
             ),
         )
     )
@@ -234,6 +240,15 @@ def load_scorecard_data():
         how="left",
     )
 
+    reporting_months = (
+        set(attendance["year_month"].dropna())
+        & set(finance["year_month"].dropna())
+    )
+
+    data = data[
+        data["year_month"].isin(reporting_months)
+    ].copy()
+
     numeric_columns = [
         "headcount",
         "headcount_start",
@@ -252,18 +267,19 @@ def load_scorecard_data():
     for column in numeric_columns:
         if column in data.columns:
             data[column] = pd.to_numeric(
-                data[column], errors="coerce"
+                data[column],
+                errors="coerce",
             )
 
     data["attendance_rate"] = (
         data["present_days"]
-        .div(data["scheduled_days"])
+        .div(data["scheduled_days"].replace(0, pd.NA))
         .mul(100)
     )
 
     data["attrition_rate"] = (
         data["exits"]
-        .div(data["headcount_start"])
+        .div(data["headcount_start"].replace(0, pd.NA))
         .mul(100)
     )
 
@@ -271,12 +287,16 @@ def load_scorecard_data():
         data["attendance_target"] * 100
     )
 
-    data = data.sort_values("year_month").reset_index(drop=True)
+    data = (
+        data.sort_values("year_month")
+        .reset_index(drop=True)
+    )
 
     return data
 
 
 def format_value(value, metric_type):
+
     if pd.isna(value):
         return "N/A"
 
@@ -293,6 +313,7 @@ def format_value(value, metric_type):
 
 
 def get_trend(current, previous, metric_type):
+
     if pd.isna(current) or pd.isna(previous):
         return "Previous month unavailable"
 
@@ -302,19 +323,27 @@ def get_trend(current, previous, metric_type):
         return f"{difference:+.2f} percentage points"
 
     if previous != 0:
-        percentage_change = difference / abs(previous) * 100
-        return f"{difference:+,.2f} ({percentage_change:+.2f}%)"
+        percentage_change = (
+            difference / abs(previous) * 100
+        )
+
+        return (
+            f"{difference:+,.2f} "
+            f"({percentage_change:+.2f}%)"
+        )
 
     return f"{difference:+,.2f} versus previous month"
 
 
 def get_status(actual, target, higher_is_better):
+
     if pd.isna(actual) or pd.isna(target):
         return "Informational", "status-info"
 
     if higher_is_better:
         if actual >= target:
             return "On Target", "status-good"
+
         return "Below Target", "status-warning"
 
     if actual <= target:
@@ -331,6 +360,7 @@ def render_kpi_card(
     status,
     status_class,
 ):
+
     target_text = (
         format_value(target, "percentage")
         if pd.notna(target)
@@ -366,6 +396,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 try:
     data = load_scorecard_data()
 
@@ -375,18 +406,29 @@ except Exception as error:
 
 
 if data.empty:
-    st.warning("No monthly metric data is available.")
+    st.warning(
+        "No common workforce and financial reporting months are available."
+    )
     st.stop()
 
 
-months = data["year_month"].dropna().sort_values().unique().tolist()
+months = (
+    data["year_month"]
+    .dropna()
+    .sort_values()
+    .unique()
+    .tolist()
+)
 
 if not months:
     st.warning("No valid reporting months were found.")
     st.stop()
 
 
-st.markdown('<div class="no-print">', unsafe_allow_html=True)
+st.markdown(
+    '<div class="no-print">',
+    unsafe_allow_html=True,
+)
 
 selected_month = st.selectbox(
     "Select reporting month",
@@ -394,7 +436,10 @@ selected_month = st.selectbox(
     index=len(months) - 1,
 )
 
-st.markdown("</div>", unsafe_allow_html=True)
+st.markdown(
+    "</div>",
+    unsafe_allow_html=True,
+)
 
 
 selected_rows = data[
@@ -409,6 +454,7 @@ if selected_rows.empty:
     st.warning("No data found for the selected month.")
     st.stop()
 
+
 current = selected_rows.iloc[0]
 
 previous = (
@@ -419,8 +465,10 @@ previous = (
 
 
 def previous_value(column):
+
     if previous is None:
         return float("nan")
+
     return previous.get(column, float("nan"))
 
 
@@ -430,9 +478,6 @@ st.caption(
     "metric views."
 )
 
-
-# KPI definitions:
-# (label, source column, format, target column, higher is better)
 
 kpis = [
     (
@@ -496,37 +541,66 @@ kpis = [
 
 st.subheader("Company Health — Eight Headline KPIs")
 
+
 for start in range(0, len(kpis), 2):
+
     columns = st.columns(2)
 
-    for column, kpi in zip(columns, kpis[start:start + 2]):
-        label, source, metric_type, target_column, higher_is_better = kpi
+    for column, kpi in zip(
+        columns,
+        kpis[start:start + 2],
+    ):
 
-        actual = current.get(source, float("nan"))
+        (
+            label,
+            source,
+            metric_type,
+            target_column,
+            higher_is_better,
+        ) = kpi
+
+        actual = current.get(
+            source,
+            float("nan"),
+        )
+
         prior = previous_value(source)
 
         target = (
-            current.get(target_column, float("nan"))
+            current.get(
+                target_column,
+                float("nan"),
+            )
             if target_column
             else float("nan")
         )
 
-        trend = get_trend(actual, prior, metric_type)
+        trend = get_trend(
+            actual,
+            prior,
+            metric_type,
+        )
 
         if target_column:
+
             status, status_class = get_status(
                 actual,
                 target,
                 higher_is_better,
             )
+
         else:
             status = "Informational"
             status_class = "status-info"
 
         with column:
+
             render_kpi_card(
                 label=label,
-                value=format_value(actual, metric_type),
+                value=format_value(
+                    actual,
+                    metric_type,
+                ),
                 target=target,
                 trend=trend,
                 status=status,
@@ -538,77 +612,59 @@ st.divider()
 
 st.subheader("KPI Details and Justification")
 
+
 justifications = [
     (
         "Employee Headcount",
-        "Shows the size of the active workforce at the end of the selected month."
+        "Shows the size of the active workforce at the end of the selected month.",
     ),
     (
         "Attendance Rate",
-        "Measures employee attendance against scheduled working days and is compared with the official 94% target."
+        "Measures employee attendance against scheduled working days and is compared with the official 94% target.",
     ),
     (
         "Monthly Attrition Rate",
-        "Measures exits relative to opening headcount and is compared with the official 1% target."
+        "Measures exits relative to opening headcount and is compared with the official 1% target.",
     ),
     (
         "Approved Leave Days",
-        "Shows the volume of approved employee leave recorded for the selected month."
+        "Shows the volume of approved employee leave recorded for the selected month.",
     ),
     (
         "Revenue",
-        "Measures income generated during the reporting month."
+        "Measures income generated during the reporting month.",
     ),
     (
         "Expenses",
-        "Tracks monthly operating and other expenses recorded in the Profit and Loss metric view."
+        "Tracks monthly operating and other expenses recorded in the Profit and Loss metric view.",
     ),
     (
         "Net Profit",
-        "Shows the financial result after subtracting expenses from revenue."
+        "Shows the financial result after subtracting expenses from revenue.",
     ),
     (
         "Profit Margin",
-        "Shows the percentage of revenue retained as net profit and helps assess profitability."
+        "Shows the percentage of revenue retained as net profit and helps assess profitability.",
     ),
 ]
 
+
 for label, explanation in justifications:
-    st.markdown(f"**{label}:** {explanation}")
+    st.markdown(
+        f"**{label}:** {explanation}"
+    )
 
 
 st.divider()
 
 st.subheader("Detailed Dashboard Navigation")
 
-navigation = [
-    (
-        "Attendance and Leave",
-        "pages/1_Attendance_Leave.py",
-    ),
-    (
-        "Attrition Analytics",
-        "pages/2_Attrition.py",
-    ),
-    (
-        "Financial Analytics",
-        "pages/6_Financial_Analytics.py",
-    ),
-    (
-        "Receivables and Cash Flow",
-        "pages/7_Receivables_Cash_Flow.py",
-    ),
-]
-
-nav_columns = st.columns(2)
-
-for index, (label, page) in enumerate(navigation):
-    with nav_columns[index % 2]:
-        st.page_link(
-            page,
-            label=f"Open {label}",
-            icon="↗",
-        )
+st.info(
+    "Use the dashboard navigation in the left sidebar "
+    "to access the detailed analytics pages, including "
+    "Attendance and Leave, Attrition, Financial Analytics, "
+    "Receivables and Cash Flow, and other dashboards."
+)
 
 
 st.divider()

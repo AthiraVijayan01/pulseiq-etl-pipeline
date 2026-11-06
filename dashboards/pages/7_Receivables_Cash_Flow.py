@@ -177,7 +177,13 @@ def prepare_cash_flow(ledger):
 
 def prepare_client_payment(invoice, client):
     paid = invoice[
-        (invoice["status"] == "PAID")
+        (
+            invoice["status"]
+            .astype(str)
+            .str.strip()
+            .str.upper()
+            == "PAID"
+        )
         & invoice["days_to_pay"].notna()
     ].copy()
 
@@ -302,7 +308,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     st.dataframe(
         status_summary,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -357,7 +363,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.dataframe(
         ageing,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -429,7 +435,7 @@ if not client_performance.empty:
                 "payment_behaviour",
             ]
         ],
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -482,7 +488,7 @@ if not overdue_invoices.empty:
 
     st.dataframe(
         overdue_clients,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -550,7 +556,7 @@ if not monthly_cash.empty:
 
     st.dataframe(
         monthly_display,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -630,7 +636,7 @@ else:
 
     st.dataframe(
         exceptions,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 

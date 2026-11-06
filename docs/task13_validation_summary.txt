@@ -1,0 +1,36 @@
+TASK 13 - DEPARTMENT-MONTH ANALYTICS
+====================================
+
+Reporting period: April 2025 - September 2026
+
+OUTPUT SUMMARY
+--------------
+Total records: 198
+Departments: 11
+Months: 18
+Duplicate department-month records: 0
+
+FINANCIAL RECONCILIATION
+------------------------
+Employer cost: INR 861780734.84
+Overtime cost: INR 3024619.28
+
+LEAVE RECONCILIATION
+--------------------
+Approved source leave days: 7276
+Invalid request days excluded: 2
+Outside-period allocation: 76
+In-period allocated leave days: 7198
+
+VALIDATION
+----------
+Total checks: 12
+Passed: 12
+Failed: 0
+
+Result: PASS
+
+LIMITATION
+----------
+Official reference files were not available.
+Official reference reconciliation remains pending.

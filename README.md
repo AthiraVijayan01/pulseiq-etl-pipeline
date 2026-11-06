@@ -335,14 +335,46 @@ The `docs/` directory contains supporting project documentation.
 - Include evidence for tests that passed and disclose unresolved validation issues.
 
 ## Current Project Status
+### Phase 3 – Financial Analytics (Task 11)
 
-The project contains the main ETL, PostgreSQL warehouse, SQL analytics, data-quality scripts, documentation, and Streamlit dashboard components.
+The Phase 3 financial analytics module provides monthly Profit and Loss reporting, expense-category analysis, and vendor-spending analysis using the PostgreSQL finance warehouse.
 
-The latest recorded runtime checks showed that the dashboard container was running, PostgreSQL was healthy, the Python compilation command completed without errors, and the dashboard data checks returned workforce analytics results.
+**Full-period financial summary (April 2025 – September 2026)**
 
-The AI-feed freshness negative test remains blocked and should be investigated separately. Completion of the full assignment should be assessed against the official requirements and verified test results.
+| Financial Metric | Verified Amount |
+|---|---:|
+| Total Revenue | ₹1,260,930,052.00 |
+| Total Expenses | ₹1,036,264,914.42 |
+| Net Profit | ₹224,665,137.58 |
+| Profit Margin | 17.82% |
+| Reporting Periods | 18 months |
 
-## Repository
+**Expense Register Summary**
+
+| Metric | Verified Amount |
+|---|---:|
+| Expense Records | 501 |
+| Amount Excluding GST | ₹168,245,930.00 |
+| GST Amount | ₹29,230,907.90 |
+| Total Including GST | ₹197,477,337.90 |
+| Unique Vendors | 30 |
+
+Expense-register amounts are presented separately from ledger-based P&L expenses to avoid double counting.
+
+**Financial Observations**
+
+- August 2026 recorded the highest monthly profit margin at 27.16%.
+- July 2025 recorded the lowest monthly profit margin at 8.27%.
+- August 2026 recorded a net profit of ₹22,126,646.76.
+
+**Verification**
+
+- Group and detail accounts were correctly classified: 5 group accounts and 42 detail accounts.
+- No ledger entries were posted directly to group accounts.
+- Monthly P&L totals reconciled with the deployed PostgreSQL views.
+- All 501 expense records matched active detail-level expense accounts.
+- Expense-category and vendor-spending views reconciled with the source expense table.
+- Dashboard visual and interaction checks remain subject to final manual review.## Repository
 
 GitHub: https://github.com/AthiraVijayan01/pulseiq-etl-pipeline
 

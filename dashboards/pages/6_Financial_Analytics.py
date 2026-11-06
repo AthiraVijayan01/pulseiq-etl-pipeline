@@ -112,7 +112,6 @@ def format_currency(value):
 
 try:
     ledger, account, expense, vendor = load_data()
-
     pnl_data = prepare_pnl(ledger, account)
 
 except Exception as error:
@@ -269,7 +268,7 @@ if not income_table.empty:
             }
         ),
         hide_index=True,
-        use_container_width=True
+        width="stretch"
     )
 else:
     st.info("No revenue records for this month.")
@@ -286,7 +285,7 @@ if not expense_table.empty:
             }
         ),
         hide_index=True,
-        use_container_width=True
+        width="stretch"
     )
 else:
     st.info("No expense records for this month.")
@@ -311,7 +310,7 @@ st.dataframe(
         {"Amount": "₹{:,.2f}"}
     ),
     hide_index=True,
-    use_container_width=True
+    width="stretch"
 )
 
 
@@ -353,7 +352,7 @@ fig.update_layout(
 
 st.plotly_chart(
     fig,
-    use_container_width=True
+    width="stretch"
 )
 
 
@@ -410,22 +409,24 @@ if not category_summary.empty:
 
     st.plotly_chart(
         category_fig,
-        use_container_width=True
+        width="stretch"
+    )
+
+    category_display = category_summary.rename(
+        columns={
+            "category_account": "Account Code",
+            "account_name": "Category",
+            "transactions": "Transactions",
+            "expense_amount": "Amount Excluding GST"
+        }
     )
 
     st.dataframe(
-        category_summary.rename(
-            columns={
-                "category_account": "Account Code",
-                "account_name": "Category",
-                "transactions": "Transactions",
-                "expense_amount": "Amount Excluding GST"
-            }
-        ).style.format(
+        category_display.style.format(
             {"Amount Excluding GST": "₹{:,.2f}"}
         ),
         hide_index=True,
-        use_container_width=True
+        width="stretch"
     )
 
 else:
@@ -481,22 +482,24 @@ if not vendor_summary.empty:
 
     st.plotly_chart(
         vendor_fig,
-        use_container_width=True
+        width="stretch"
+    )
+
+    vendor_display = vendor_summary.rename(
+        columns={
+            "vendor_id": "Vendor ID",
+            "vendor_name": "Vendor Name",
+            "transactions": "Transactions",
+            "total_spend": "Total Spend"
+        }
     )
 
     st.dataframe(
-        vendor_summary.rename(
-            columns={
-                "vendor_id": "Vendor ID",
-                "vendor_name": "Vendor Name",
-                "transactions": "Transactions",
-                "total_spend": "Total Spend"
-            }
-        ).style.format(
+        vendor_display.style.format(
             {"Total Spend": "₹{:,.2f}"}
         ),
         hide_index=True,
-        use_container_width=True
+        width="stretch"
     )
 
 else:
@@ -551,14 +554,14 @@ validation = pd.DataFrame({
         format_currency(total_revenue),
         format_currency(total_expenses),
         format_currency(total_profit),
-        len(monthly)
+        str(len(monthly))
     ]
 })
 
 st.dataframe(
     validation,
     hide_index=True,
-    use_container_width=True
+    width="stretch"
 )
 
 st.caption(

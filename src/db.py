@@ -1,4 +1,5 @@
-﻿"""PostgreSQL connection helpers for PulseIQ."""
+﻿
+"""PostgreSQL connection helpers for PulseIQ."""
 
 import os
 from contextlib import contextmanager
@@ -63,6 +64,7 @@ def get_connection():
         password=settings["POSTGRES_PASSWORD"],
         host=settings["POSTGRES_HOST"],
         port=int(settings["POSTGRES_PORT"]),
+        sslmode="require",
         connect_timeout=10,
     )
 

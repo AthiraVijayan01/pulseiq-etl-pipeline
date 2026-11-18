@@ -1,4 +1,5 @@
-﻿from pathlib import Path
+﻿
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
@@ -12,8 +13,8 @@ st.set_page_config(
 
 PROJECT_DIR = Path(__file__).resolve().parents[2]
 DEPARTMENT_FILE = PROJECT_DIR / "outputs" / "task13_department_month.csv"
-TEAM_FILE = PROJECT_DIR / "clean" / "dim_team.csv"
-DEPARTMENT_DIM_FILE = PROJECT_DIR / "clean" / "dim_department.csv"
+TEAM_FILE = PROJECT_DIR / "deployment_data" / "dim_team.csv"
+DEPARTMENT_DIM_FILE = PROJECT_DIR / "deployment_data" / "dim_department.csv"
 
 MIN_GROUP_SIZE = 5
 
@@ -64,20 +65,33 @@ METRIC_DEFINITIONS = {
 
 @st.cache_data
 def load_data():
+    required_files = [
+        DEPARTMENT_FILE,
+        TEAM_FILE,
+        DEPARTMENT_DIM_FILE
+    ]
+
+    missing_files = [
+        str(file.relative_to(PROJECT_DIR))
+        for file in required_files
+        if not file.exists()
+    ]
+
+    if missing_files:
+        raise FileNotFoundError(
+            "Required deployment data files are missing: "
+            + ", ".join(missing_files)
+        )
+
     departments = pd.read_csv(DEPARTMENT_FILE)
     teams = pd.read_csv(TEAM_FILE)
-
-    department_dimension = (
-        pd.read_csv(DEPARTMENT_DIM_FILE)
-        if DEPARTMENT_DIM_FILE.exists()
-        else pd.DataFrame()
-    )
+    department_dimension = pd.read_csv(DEPARTMENT_DIM_FILE)
 
     departments["month"] = pd.to_datetime(
         departments["month"], errors="coerce"
     )
 
-    for column in [
+    required_department_columns = [
         "department_id",
         "headcount_end",
         "hires",
@@ -88,13 +102,33 @@ def load_data():
         "scheduled_days",
         "approved_leave_days",
         "average_headcount"
-    ]:
-        if column not in departments.columns:
-            raise ValueError(f"Required column missing: {column}")
+    ]
 
-    for column in ["team_id", "department_id", "active_members"]:
+    for column in required_department_columns:
+        if column not in departments.columns:
+            raise ValueError(f"Required department column missing: {column}")
+
+    required_team_columns = [
+        "team_id",
+        "team_name",
+        "department_id",
+        "active_members"
+    ]
+
+    for column in required_team_columns:
         if column not in teams.columns:
             raise ValueError(f"Required team column missing: {column}")
+
+    required_dimension_columns = [
+        "department_id",
+        "department_name"
+    ]
+
+    for column in required_dimension_columns:
+        if column not in department_dimension.columns:
+            raise ValueError(
+                f"Required department dimension column missing: {column}"
+            )
 
     teams["active_members"] = pd.to_numeric(
         teams["active_members"], errors="coerce"
@@ -175,7 +209,6 @@ except Exception as error:
     st.stop()
 
 
-# Role selection
 role = st.selectbox(
     "Select demonstration role",
     ["ADMIN", "HR", "MANAGER", "EXECUTIVE"]
@@ -183,7 +216,6 @@ role = st.selectbox(
 
 st.caption(f"Current demonstration role: {role}")
 
-# Month selection
 available_months = sorted(
     departments["month"].dropna().unique(),
     reverse=True
@@ -203,24 +235,13 @@ monthly_data = departments[
     departments["month"] == selected_month
 ].copy()
 
-# Optional department names
-if (
-    not department_dimension.empty
-    and {"department_id", "department_name"}.issubset(
-        department_dimension.columns
+department_names = dict(
+    zip(
+        department_dimension["department_id"],
+        department_dimension["department_name"]
     )
-):
-    department_names = dict(
-        zip(
-            department_dimension["department_id"],
-            department_dimension["department_name"]
-        )
-    )
-else:
-    department_names = {}
+)
 
-
-# Exploration level
 level = st.radio(
     "Explore by",
     ["Company", "Department", "Team"],
@@ -307,7 +328,6 @@ elif level == "Department":
         f"Department: {department_names.get(selected_department, selected_department)}"
     )
     st.caption(METRIC_DEFINITIONS[metric])
-
 
 elif level == "Team":
 

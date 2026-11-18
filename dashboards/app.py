@@ -339,13 +339,7 @@ def load_tenure_summary(as_of_date, departments):
     query += """
         GROUP BY tenure_band
         HAVING COUNT(DISTINCT e.employee_id) >= %s
-        ORDER BY
-            CASE tenure_band
-                WHEN 'Under 1 year' THEN 1
-                WHEN '1-3 years' THEN 2
-                WHEN '3-5 years' THEN 3
-                ELSE 4
-            END
+        ORDER BY MIN(e.joining_date) DESC
     """
 
     params.append(MIN_GROUP_SIZE)
@@ -655,30 +649,31 @@ try:
 
     st.subheader("Workforce Overview")
 
+    # Initialize before the privacy condition.
+    joiners = 0
+    leavers = 0
+
+    if not movement_data.empty:
+        joiners = int(
+            movement_data.loc[
+                movement_data["movement"] == "Joiners",
+                "employees",
+            ].sum()
+        )
+
+        leavers = int(
+            movement_data.loc[
+                movement_data["movement"] == "Leavers",
+                "employees",
+            ].sum()
+        )
+
     if headcount < MIN_GROUP_SIZE:
         st.warning(
             "Company headcount is suppressed because the selected "
             "group contains fewer than five employees."
         )
     else:
-        joiners = 0
-        leavers = 0
-
-        if not movement_data.empty:
-            joiners = int(
-                movement_data.loc[
-                    movement_data["movement"] == "Joiners",
-                    "employees",
-                ].sum()
-            )
-
-            leavers = int(
-                movement_data.loc[
-                    movement_data["movement"] == "Leavers",
-                    "employees",
-                ].sum()
-            )
-
         c1, c2, c3, c4 = st.columns(4)
 
         c1.metric("Headcount", f"{headcount:,}")

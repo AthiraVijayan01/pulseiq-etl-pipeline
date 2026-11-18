@@ -8,7 +8,6 @@ from src.db import get_connection
 
 MIN_GROUP_SIZE = 5
 
-
 st.set_page_config(
     page_title="Attrition Analytics | PulseIQ",
     page_icon="📉",
@@ -36,11 +35,21 @@ def load_query(query):
 def parse_dates(df, columns):
     for column in columns:
         if column in df.columns:
-            df[column] = pd.to_datetime(df[column], errors="coerce")
+            df[column] = pd.to_datetime(
+                df[column],
+                errors="coerce",
+            )
     return df
 
 
+def normalize_id(series):
+    return series.astype("string").str.strip()
+
+
 def safe_count(value):
+    if pd.isna(value):
+        return "Unavailable"
+
     value = int(value)
 
     if 0 < value < MIN_GROUP_SIZE:
@@ -49,8 +58,98 @@ def safe_count(value):
     return f"{value:,}"
 
 
+def has_safe_group_size(value):
+    return pd.notna(value) and value >= MIN_GROUP_SIZE
+
+
+def prepare_current_employees(employees):
+    employees = employees.copy()
+
+    flags = (
+        employees["is_current"]
+        .astype("string")
+        .str.strip()
+        .str.upper()
+    )
+
+    current_rows = employees[
+        flags.isin(["Y", "YES", "TRUE", "T", "1"])
+    ].copy()
+
+    current_rows = current_rows.sort_values(
+        "valid_from",
+        na_position="first",
+    )
+
+    current_rows = current_rows.drop_duplicates(
+        "employee_id",
+        keep="last",
+    )
+
+    employees = employees.sort_values(
+        "valid_from",
+        na_position="first",
+    )
+
+    latest_rows = employees.drop_duplicates(
+        "employee_id",
+        keep="last",
+    )
+
+    current_ids = set(
+        current_rows["employee_id"].dropna().tolist()
+    )
+
+    missing_current = latest_rows[
+        ~latest_rows["employee_id"].isin(current_ids)
+    ].copy()
+
+    result = pd.concat(
+        [current_rows, missing_current],
+        ignore_index=True,
+    )
+
+    return result.drop_duplicates(
+        "employee_id",
+        keep="last",
+    ).copy()
+
+
+def calculate_tenure_years(data):
+    valid = data[
+        data["hire_date"].notna()
+        & data["exit_date"].notna()
+    ].copy()
+
+    valid["tenure_years"] = (
+        valid["exit_date"] - valid["hire_date"]
+    ).dt.days / 365.25
+
+    return valid[
+        valid["tenure_years"].notna()
+        & (valid["tenure_years"] >= 0)
+    ].copy()
+
+
+def prepare_risk_bands(series):
+    normalized = (
+        series.fillna("Unknown")
+        .astype(str)
+        .str.strip()
+        .str.title()
+    )
+
+    valid_bands = {"Low", "Medium", "High"}
+
+    return normalized.where(
+        normalized.isin(valid_bands),
+        "Unknown",
+    )
+
+
 try:
-    employees = load_query("""
+    employees = load_query(
+        """
         SELECT
             employee_id,
             hire_date,
@@ -60,16 +159,20 @@ try:
             valid_from,
             is_current
         FROM phase2.dim_employee
-    """)
+        """
+    )
 
-    departments = load_query("""
+    departments = load_query(
+        """
         SELECT
             department_id,
             department_name
         FROM phase2.dim_department
-    """)
+        """
+    )
 
-    risk = load_query("""
+    risk = load_query(
+        """
         SELECT
             employee_id,
             as_of_date,
@@ -79,10 +182,10 @@ try:
             model_version,
             top_reason_1,
             top_reason_2,
-            top_reason_3,
-            model_note
+            top_reason_3
         FROM phase2.fact_attrition_risk
-    """)
+        """
+    )
 
 except Exception as exc:
     st.error(
@@ -117,15 +220,21 @@ required_department_columns = {
 }
 
 if not required_employee_columns.issubset(employees.columns):
-    st.error("The PostgreSQL employee table is missing required columns.")
+    st.error(
+        "The PostgreSQL employee table is missing required columns."
+    )
     st.stop()
 
 if not required_risk_columns.issubset(risk.columns):
-    st.error("The PostgreSQL attrition-risk table is missing required columns.")
+    st.error(
+        "The PostgreSQL attrition-risk table is missing required columns."
+    )
     st.stop()
 
 if not required_department_columns.issubset(departments.columns):
-    st.error("The PostgreSQL department table is missing required columns.")
+    st.error(
+        "The PostgreSQL department table is missing required columns."
+    )
     st.stop()
 
 
@@ -134,22 +243,38 @@ employees = parse_dates(
     ["hire_date", "exit_date", "valid_from"],
 )
 
-risk = parse_dates(risk, ["as_of_date"])
-
-employees["employee_id"] = (
-    employees["employee_id"].astype("string").str.strip()
+risk = parse_dates(
+    risk,
+    ["as_of_date"],
 )
 
-risk["employee_id"] = (
-    risk["employee_id"].astype("string").str.strip()
+employees["employee_id"] = normalize_id(
+    employees["employee_id"]
 )
 
-employees = employees.dropna(subset=["employee_id"]).copy()
+risk["employee_id"] = normalize_id(
+    risk["employee_id"]
+)
+
+employees["department_id"] = normalize_id(
+    employees["department_id"]
+)
+
+risk["department_id"] = normalize_id(
+    risk["department_id"]
+)
+
+departments["department_id"] = normalize_id(
+    departments["department_id"]
+)
+
+employees = employees.dropna(
+    subset=["employee_id"]
+).copy()
 
 risk = risk.dropna(
     subset=["employee_id", "as_of_date"]
 ).copy()
-
 
 department_lookup = (
     departments.dropna(subset=["department_id"])
@@ -166,6 +291,17 @@ risk["department"] = risk["department_id"].map(
     department_lookup
 )
 
+employees["department"] = (
+    employees["department"]
+    .fillna("Unassigned")
+    .astype(str)
+)
+
+risk["department"] = (
+    risk["department"]
+    .fillna("Unassigned")
+    .astype(str)
+)
 
 employees["employment_status"] = (
     employees["employment_status"]
@@ -179,57 +315,33 @@ risk["risk_score_12m"] = pd.to_numeric(
     errors="coerce",
 )
 
-if risk["risk_score_12m"].dropna().empty:
-    st.warning("No numeric risk scores are available.")
-
-
-# Select the current SCD Type 2 employee record.
-current_flags = (
-    employees["is_current"]
-    .astype(str)
-    .str.strip()
-    .str.upper()
+invalid_risk_scores = (
+    risk["risk_score_12m"].notna()
+    & ~risk["risk_score_12m"].between(0, 1)
 )
 
-current_employees = employees[
-    current_flags.isin(["Y", "TRUE", "1"])
-].copy()
+if invalid_risk_scores.any():
+    risk.loc[
+        invalid_risk_scores,
+        "risk_score_12m",
+    ] = float("nan")
 
-if current_employees["employee_id"].duplicated().any():
-    current_employees = (
-        current_employees.sort_values(
-            "valid_from",
-            na_position="first",
-        )
-        .drop_duplicates("employee_id", keep="last")
-    )
+risk["risk_band"] = prepare_risk_bands(
+    risk["risk_band"]
+)
 
-if current_employees.empty:
-    current_employees = (
-        employees.sort_values(
-            "valid_from",
-            na_position="first",
-        )
-        .drop_duplicates("employee_id", keep="last")
-        .copy()
-    )
+current_employees = prepare_current_employees(
+    employees
+)
 
-
-# Count distinct employees rather than SCD Type 2 history records.
 exits = current_employees[
     current_employees["exit_date"].notna()
 ].copy()
-
-exits = exits.drop_duplicates(
-    "employee_id",
-    keep="last",
-)
 
 exits = exits[
     exits["hire_date"].isna()
     | (exits["exit_date"] >= exits["hire_date"])
 ].copy()
-
 
 if exits.empty:
     st.info("No valid employee exit records were found.")
@@ -295,54 +407,50 @@ if filtered_exits.empty:
 else:
     total_exits = filtered_exits["employee_id"].nunique()
 
-    tenure_days = (
-        filtered_exits["exit_date"]
-        - filtered_exits["hire_date"]
-    ).dt.days
-
-    valid_tenure = tenure_days[tenure_days >= 0]
+    tenure_data = calculate_tenure_years(
+        filtered_exits
+    )
 
     median_tenure_years = (
-        valid_tenure.median() / 365.25
-        if not valid_tenure.empty
+        tenure_data["tenure_years"].median()
+        if not tenure_data.empty
         else None
-    )
-
-    c1, c2, c3 = st.columns(3)
-
-    c1.metric(
-        "Unique employee exits",
-        safe_count(total_exits),
-    )
-
-    c2.metric(
-        "Median tenure at exit",
-        (
-            f"{median_tenure_years:.1f} years"
-            if total_exits >= MIN_GROUP_SIZE
-            and median_tenure_years is not None
-            else "Suppressed / Unavailable"
-        ),
-    )
-
-    c3.metric(
-        "Departments represented",
-        f"{filtered_exits['department'].nunique():,}",
-    )
-
-    st.caption(
-        "Exit totals count distinct employees in the selected period. "
-        "They are not an attrition rate because the average workforce "
-        "denominator has not been calculated here."
     )
 
     if total_exits < MIN_GROUP_SIZE:
         st.info(
-            "Detailed exit analysis is hidden because fewer than five "
-            "distinct employees match the selected filters."
+            "Exit results are hidden because fewer than five distinct "
+            "employees match the selected filters."
         )
 
     else:
+        c1, c2, c3 = st.columns(3)
+
+        c1.metric(
+            "Unique employee exits",
+            safe_count(total_exits),
+        )
+
+        c2.metric(
+            "Median tenure at exit",
+            (
+                f"{median_tenure_years:.1f} years"
+                if median_tenure_years is not None
+                else "Unavailable"
+            ),
+        )
+
+        c3.metric(
+            "Departments represented",
+            f"{filtered_exits['department'].nunique():,}",
+        )
+
+        st.caption(
+            "Exit totals count distinct employees in the selected period. "
+            "They are not an attrition rate because the average workforce "
+            "denominator is not calculated on this page."
+        )
+
         monthly = (
             filtered_exits.assign(
                 exit_month=(
@@ -357,10 +465,6 @@ else:
             .sort_values("exit_month")
         )
 
-        monthly["Display exits"] = (
-            monthly["Employee exits"].apply(safe_count)
-        )
-
         st.subheader("Monthly exit trend")
 
         monthly_chart = monthly[
@@ -372,7 +476,6 @@ else:
                 "Monthly exit chart is hidden because no month reaches "
                 "the minimum group size of five."
             )
-
         else:
             fig = px.line(
                 monthly_chart,
@@ -391,18 +494,36 @@ else:
             )
 
         with st.expander("Monthly exit counts"):
-            st.dataframe(
-                monthly[
-                    ["exit_month", "Display exits"]
-                ].rename(
-                    columns={
-                        "exit_month": "Month",
-                        "Display exits": "Employee exits",
-                    }
-                ),
-                use_container_width=True,
-                hide_index=True,
+            visible_monthly = monthly[
+                monthly["Employee exits"] >= MIN_GROUP_SIZE
+            ].copy()
+
+            suppressed_months = len(monthly) - len(
+                visible_monthly
             )
+
+            if suppressed_months:
+                st.info(
+                    f"{suppressed_months} month(s) are hidden because "
+                    "their exit counts are below five."
+                )
+
+            if visible_monthly.empty:
+                st.info("No monthly counts meet the privacy threshold.")
+            else:
+                visible_monthly["Employee exits"] = (
+                    visible_monthly["Employee exits"].apply(
+                        safe_count
+                    )
+                )
+
+                st.dataframe(
+                    visible_monthly.rename(
+                        columns={"exit_month": "Month"}
+                    ),
+                    use_container_width=True,
+                    hide_index=True,
+                )
 
         st.subheader("Exits by department")
 
@@ -412,22 +533,32 @@ else:
             .reset_index(name="Employee exits")
         )
 
-        department_exits = department_exits[
+        visible_department_exits = department_exits[
             department_exits["Employee exits"] >= MIN_GROUP_SIZE
         ].sort_values(
             "Employee exits",
             ascending=False,
         )
 
-        if department_exits.empty:
+        suppressed_departments = (
+            len(department_exits)
+            - len(visible_department_exits)
+        )
+
+        if suppressed_departments:
+            st.info(
+                f"{suppressed_departments} department group(s) are "
+                "hidden because they contain fewer than five exits."
+            )
+
+        if visible_department_exits.empty:
             st.info(
                 "Department exit counts are hidden because no department "
                 "reaches the minimum group size of five."
             )
-
         else:
             fig = px.bar(
-                department_exits,
+                visible_department_exits,
                 x="department",
                 y="Employee exits",
                 labels={
@@ -443,70 +574,104 @@ else:
 
         st.subheader("Tenure at exit")
 
-        tenure_data = filtered_exits.copy()
-
-        tenure_data["Tenure (years)"] = (
-            tenure_data["exit_date"]
-            - tenure_data["hire_date"]
-        ).dt.days / 365.25
-
-        tenure_data = tenure_data[
-            tenure_data["Tenure (years)"].notna()
-            & (tenure_data["Tenure (years)"] >= 0)
-        ]
-
-        if len(tenure_data) >= MIN_GROUP_SIZE:
-            fig = px.histogram(
-                tenure_data,
-                x="Tenure (years)",
-                nbins=12,
-                labels={
-                    "Tenure (years)": (
-                        "Completed tenure at exit (years)"
-                    )
-                },
-            )
-
-            st.plotly_chart(
-                fig,
-                use_container_width=True,
-            )
-
-        else:
+        if len(tenure_data) < MIN_GROUP_SIZE:
             st.info(
                 "Tenure distribution is hidden because fewer than five "
                 "valid employee records are available."
             )
+        else:
+            tenure_data = tenure_data.copy()
+
+            tenure_data["Tenure band"] = pd.cut(
+                tenure_data["tenure_years"],
+                bins=[
+                    float("-inf"),
+                    1,
+                    3,
+                    5,
+                    10,
+                    float("inf"),
+                ],
+                labels=[
+                    "Less than 1 year",
+                    "1–3 years",
+                    "3–5 years",
+                    "5–10 years",
+                    "10+ years",
+                ],
+                right=False,
+            )
+
+            tenure_counts = (
+                tenure_data.groupby(
+                    "Tenure band",
+                    observed=False,
+                )
+                .size()
+                .reset_index(name="Employees")
+            )
+
+            tenure_counts = tenure_counts[
+                tenure_counts["Employees"] > 0
+            ]
+
+            if (
+                tenure_counts["Employees"] < MIN_GROUP_SIZE
+            ).any():
+                st.info(
+                    "The tenure distribution is hidden because at least "
+                    "one tenure band contains fewer than five employees."
+                )
+            else:
+                fig = px.bar(
+                    tenure_counts,
+                    x="Tenure band",
+                    y="Employees",
+                    labels={
+                        "Tenure band": "Completed tenure at exit",
+                        "Employees": "Employees",
+                    },
+                )
+
+                st.plotly_chart(
+                    fig,
+                    use_container_width=True,
+                )
 
         st.subheader("Exit status categories")
 
         status_counts = (
-            filtered_exits.groupby("employment_status")["employee_id"]
+            filtered_exits.groupby("employment_status")[
+                "employee_id"
+            ]
             .nunique()
             .reset_index(name="Employees")
         )
 
-        status_counts = status_counts[
+        visible_status_counts = status_counts[
             status_counts["Employees"] >= MIN_GROUP_SIZE
         ]
 
-        if status_counts.empty:
+        if len(visible_status_counts) != len(status_counts):
+            st.info(
+                "Some exit status categories are hidden because they "
+                "contain fewer than five employees."
+            )
+
+        if visible_status_counts.empty:
             st.info(
                 "Exit status breakdown is hidden for privacy."
             )
-
         else:
             st.dataframe(
-                status_counts,
+                visible_status_counts,
                 use_container_width=True,
                 hide_index=True,
             )
 
         st.info(
-            "The dataset contains employment status values such as "
-            "Resigned, Terminated, and Contract Ended. These are presented "
-            "as recorded; the available change_reason field is not treated "
-            "as a verified voluntary-exit reason."
+            "Employment status values are presented as recorded. "
+            "They are not treated as verified voluntary-exit reasons."
         )
 
         st.subheader("Three numerical findings")
@@ -525,22 +690,20 @@ else:
                 f"{int(highest_month['Employee exits'])} in "
                 f"{highest_month['exit_month']:%B %Y}."
             )
-
         else:
             st.write(
                 "1. No monthly exit count is reported because all "
                 "monthly groups fall below the privacy threshold."
             )
 
-        if not department_exits.empty:
-            top_department = department_exits.iloc[0]
+        if not visible_department_exits.empty:
+            top_department = visible_department_exits.iloc[0]
 
             st.write(
                 f"2. {top_department['department']} had the highest "
                 f"visible department exit count: "
                 f"{int(top_department['Employee exits'])}."
             )
-
         else:
             st.write(
                 "2. No department exit count is reported because the "
@@ -552,7 +715,6 @@ else:
                 f"3. Median tenure among valid exit records was "
                 f"{median_tenure_years:.1f} years."
             )
-
         else:
             st.write(
                 "3. Median tenure could not be calculated from valid dates."
@@ -582,20 +744,20 @@ else:
         st.info("No prediction snapshot dates are available.")
 
     else:
-        snapshot_labels = {
-            pd.Timestamp(value).strftime("%Y-%m-%d"): pd.Timestamp(value)
+        snapshot_labels = [
+            pd.Timestamp(value).strftime("%Y-%m-%d")
             for value in available_snapshots
-        }
+        ]
 
         selected_snapshot_label = st.selectbox(
             "Prediction snapshot date",
-            list(snapshot_labels.keys()),
+            snapshot_labels,
             index=len(snapshot_labels) - 1,
         )
 
-        selected_snapshot = snapshot_labels[
+        selected_snapshot = pd.Timestamp(
             selected_snapshot_label
-        ]
+        )
 
         snapshot = risk[
             risk["as_of_date"] == selected_snapshot
@@ -605,9 +767,14 @@ else:
             snapshot["department"].isin(selected_departments)
         ].copy()
 
-        snapshot = (
-            snapshot.sort_values("as_of_date")
-            .drop_duplicates("employee_id", keep="last")
+        snapshot = snapshot.sort_values(
+            ["as_of_date", "model_version"],
+            na_position="first",
+        )
+
+        snapshot = snapshot.drop_duplicates(
+            "employee_id",
+            keep="last",
         )
 
         employee_count = snapshot["employee_id"].nunique()
@@ -619,15 +786,12 @@ else:
             )
 
         else:
-            model_versions = (
-                sorted(
-                    snapshot["model_version"]
-                    .dropna()
-                    .astype(str)
-                    .unique()
-                )
-                if "model_version" in snapshot.columns
-                else []
+            model_versions = sorted(
+                snapshot["model_version"]
+                .dropna()
+                .astype(str)
+                .unique()
+                .tolist()
             )
 
             st.caption(
@@ -636,26 +800,28 @@ else:
                 f"Model: {', '.join(model_versions) if model_versions else 'Not specified'}"
             )
 
-            band_order = ["Low", "Medium", "High"]
-
             band_counts = (
                 snapshot["risk_band"]
-                .fillna("Unknown")
                 .value_counts()
-                .reindex(band_order, fill_value=0)
+                .reindex(
+                    ["Low", "Medium", "High", "Unknown"],
+                    fill_value=0,
+                )
             )
 
-            small_nonzero_band = (
-                (band_counts > 0)
-                & (band_counts < MIN_GROUP_SIZE)
-            ).any()
+            nonzero_bands = band_counts[
+                band_counts > 0
+            ]
 
-            if small_nonzero_band:
+            unsafe_bands = nonzero_bands[
+                nonzero_bands < MIN_GROUP_SIZE
+            ]
+
+            if not unsafe_bands.empty:
                 st.info(
                     "The risk-band breakdown is hidden because at least "
                     "one non-zero band contains fewer than five employees."
                 )
-
             else:
                 c1, c2, c3 = st.columns(3)
 
@@ -674,17 +840,23 @@ else:
                     safe_count(band_counts["Medium"]),
                 )
 
-                band_chart = (
-                    band_counts.rename_axis("Risk band")
+                visible_band_counts = (
+                    band_counts[band_counts > 0]
+                    .rename_axis("Risk band")
                     .reset_index(name="Predicted employees")
                 )
 
                 fig = px.bar(
-                    band_chart,
+                    visible_band_counts,
                     x="Risk band",
                     y="Predicted employees",
                     category_orders={
-                        "Risk band": band_order
+                        "Risk band": [
+                            "Low",
+                            "Medium",
+                            "High",
+                            "Unknown",
+                        ]
                     },
                     labels={
                         "Predicted employees": "Employees"
@@ -732,34 +904,47 @@ else:
                 ).round(2)
 
                 risk_department["High-band count"] = (
-                    risk_department["high_risk_count"].apply(safe_count)
+                    risk_department["high_risk_count"].apply(
+                        safe_count
+                    )
                 )
 
                 risk_department["Medium-band count"] = (
-                    risk_department["medium_risk_count"].apply(safe_count)
+                    risk_department["medium_risk_count"].apply(
+                        safe_count
+                    )
                 )
 
                 st.subheader("Department risk summary")
 
-                fig = px.bar(
-                    risk_department.sort_values(
-                        "mean_risk_score_pct",
-                        ascending=False,
-                    ),
-                    x="department",
-                    y="mean_risk_score_pct",
-                    labels={
-                        "department": "Department",
-                        "mean_risk_score_pct": (
-                            "Average predicted risk score (%)"
-                        ),
-                    },
+                chart_data = risk_department[
+                    risk_department["mean_risk_score_pct"].notna()
+                ].sort_values(
+                    "mean_risk_score_pct",
+                    ascending=False,
                 )
 
-                st.plotly_chart(
-                    fig,
-                    use_container_width=True,
-                )
+                if chart_data.empty:
+                    st.info(
+                        "No valid department risk scores are available."
+                    )
+                else:
+                    fig = px.bar(
+                        chart_data,
+                        x="department",
+                        y="mean_risk_score_pct",
+                        labels={
+                            "department": "Department",
+                            "mean_risk_score_pct": (
+                                "Average predicted risk score (%)"
+                            ),
+                        },
+                    )
+
+                    st.plotly_chart(
+                        fig,
+                        use_container_width=True,
+                    )
 
                 st.dataframe(
                     risk_department[
@@ -835,7 +1020,6 @@ else:
                         "Reason themes are hidden because no theme is "
                         "associated with at least five distinct employees."
                     )
-
                 else:
                     st.subheader("Common model reason themes")
 
@@ -855,13 +1039,3 @@ else:
                         use_container_width=True,
                         hide_index=True,
                     )
-
-            if "model_note" in snapshot.columns:
-                model_notes = (
-                    snapshot["model_note"]
-                    .dropna()
-                    .unique()
-                )
-
-                if len(model_notes):
-                    st.info(str(model_notes[0]))

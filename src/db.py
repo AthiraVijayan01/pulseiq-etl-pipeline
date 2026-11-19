@@ -4,6 +4,7 @@
 import os
 from contextlib import contextmanager
 from pathlib import Path
+from urllib.parse import urlparse
 
 import psycopg
 from dotenv import load_dotenv
@@ -15,49 +16,72 @@ load_dotenv(dotenv_path=ENV_FILE, override=False)
 
 
 def get_secret(key, default=None):
-    """Read settings from environment variables or Streamlit secrets."""
-
-    value = os.getenv(key)
-
-    if value:
-        return value
+    """Read Streamlit Cloud secrets first, then environment variables."""
 
     try:
         import streamlit as st
-        return st.secrets.get(key, default)
+
+        value = st.secrets.get(key)
+
+        if value is not None and str(value).strip():
+            return str(value).strip()
+
     except Exception:
-        return default
+        pass
+
+    value = os.getenv(key)
+
+    if value is not None and value.strip():
+        return value.strip()
+
+    return default
 
 
 def get_database_settings():
-    """Read Docker or Neon PostgreSQL settings."""
+    """Read Neon or Docker PostgreSQL settings."""
 
-    mode = get_secret("DATABASE_MODE", "docker").lower()
+    database_url = (
+        get_secret("NEON_DATABASE_URL")
+        or get_secret("DATABASE_URL")
+    )
+
+    mode = get_secret("DATABASE_MODE")
+
+    if mode:
+        mode = mode.strip().lower()
+    elif database_url:
+        mode = "neon"
+    else:
+        mode = "docker"
 
     if mode == "neon":
-        database_url = (
-            get_secret("NEON_DATABASE_URL")
-            or get_secret("DATABASE_URL")
-        )
 
         if not database_url:
             raise RuntimeError(
-                "Configure NEON_DATABASE_URL or DATABASE_URL."
+                "Neon mode selected, but NEON_DATABASE_URL "
+                "or DATABASE_URL is missing from Streamlit Secrets."
             )
 
-        if not database_url.startswith(
-            ("postgresql://", "postgres://")
-        ):
-            raise RuntimeError("Invalid PostgreSQL database URL.")
+        parsed_url = urlparse(database_url)
+
+        if parsed_url.scheme not in ("postgresql", "postgres"):
+            raise RuntimeError(
+                "Invalid Neon URL. Expected a PostgreSQL connection URL."
+            )
+
+        if not parsed_url.hostname or not parsed_url.path:
+            raise RuntimeError(
+                "Neon connection URL is incomplete."
+            )
 
         return {
             "mode": "neon",
             "database_url": database_url,
         }
 
-    if mode != "docker":
+    if mode not in ("docker", "postgres"):
         raise RuntimeError(
-            "DATABASE_MODE must be either 'docker' or 'neon'."
+            "DATABASE_MODE must be 'neon' or 'docker'."
         )
 
     required_settings = [
@@ -82,10 +106,12 @@ def get_database_settings():
         raise RuntimeError(
             "Missing PostgreSQL settings: "
             + ", ".join(missing)
+            + ". For Neon, configure DATABASE_MODE='neon' "
+            "and NEON_DATABASE_URL in Streamlit Secrets."
         )
 
     return {
-        "mode": "postgres",
+        "mode": "docker",
         **settings,
         "POSTGRES_SSLMODE": get_secret(
             "POSTGRES_SSLMODE", "require"
@@ -102,7 +128,7 @@ def get_connection():
         return psycopg.connect(
             settings["database_url"],
             sslmode="require",
-            connect_timeout=10,
+            connect_timeout=15,
         )
 
     return psycopg.connect(
@@ -112,13 +138,13 @@ def get_connection():
         host=settings["POSTGRES_HOST"],
         port=int(settings["POSTGRES_PORT"]),
         sslmode=settings["POSTGRES_SSLMODE"],
-        connect_timeout=10,
+        connect_timeout=15,
     )
 
 
 @contextmanager
 def database_connection():
-    """Provide a connection and close it reliably."""
+    """Provide a database connection and close it reliably."""
 
     connection = get_connection()
 

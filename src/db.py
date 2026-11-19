@@ -1,4 +1,4 @@
-
+﻿
 """PostgreSQL connection helpers for PulseIQ."""
 
 import os
@@ -85,10 +85,10 @@ def get_database_settings():
         )
 
     return {
-        "mode": "docker",
+        "mode": "postgres",
         **settings,
         "POSTGRES_SSLMODE": get_secret(
-            "POSTGRES_SSLMODE", "disable"
+            "POSTGRES_SSLMODE", "require"
         ),
     }
 
@@ -101,6 +101,7 @@ def get_connection():
     if settings["mode"] == "neon":
         return psycopg.connect(
             settings["database_url"],
+            sslmode="require",
             connect_timeout=10,
         )
 

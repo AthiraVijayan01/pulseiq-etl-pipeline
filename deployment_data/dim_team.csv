@@ -1,0 +1,17 @@
+team_id,team_name,department_id,active_members
+T01,Platform Core,D01,35
+T02,Payments & Billing,D01,34
+T03,Mobile Apps,D01,28
+T04,QA Automation,D01,33
+T05,DevOps & Reliability,D01,34
+T06,Product Squad,D02,15
+T07,Design Systems,D02,10
+T08,Data Platform,D03,14
+T09,ML Services,D03,20
+T10,Analytics & BI,D03,17
+T11,Growth Marketing,D05,12
+T12,Support Tooling,D06,58
+T13,HR Systems,D07,19
+T14,Finance Automation,D08,16
+T15,Internal IT,D09,28
+T16,Sales Enablement,D04,45
